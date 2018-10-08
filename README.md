@@ -26,3 +26,13 @@ Image Files are as Follows
  - calendar.png          ( For Email )
  - window-icon.png
  
+
+Notes to self Linux commands for GitHub
+ - To get code from GitHub
+  	- git clone https://github.com/backland/HGCTT.git
+  	- git checkout
+
+ - To commit changes and push into GitHub
+	- git commit -a 
+        - git push https://github.com/backland/HGCTT.git master
+
