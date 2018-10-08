@@ -237,10 +237,12 @@
         where a.BookingDate = '$BookingDate'
         ORDER BY a.GroupNo";
   $result = mysqli_query($link,$sql);
+  $grp=0;
   if ($result) {
     $cols=0;
     $MailTable="";
     while ($row = mysqli_fetch_array($result)) {
+      $grp++;
       $p1="&nbsp;"; $p2="&nbsp;"; $p3="&nbsp;"; $p4="&nbsp;";
       if (!empty($row[1])) $p1="<b>".htmlspecialchars($row[1])."</b>";
       if (!empty($row[2])) $p2=htmlspecialchars($row[2]);
@@ -264,6 +266,10 @@
                   "<td style='width:24%;white-space:nowrap'>".$p4."</td></tr>".PHP_EOL;
  
     }
+    if ($grp==0) {
+       $tableLarge.= "<tr><td colspan=5 style='text-align:center'><h5>Booking Sheet Not Generated</h5></td></tr>";
+       $tableSmall.= "<tr><td colspan=2 style='text-align:center'><h5>Booking Sheet Not Generated</h5></td></tr>";
+    }
   } else {
     echo mysqli_error($link);
   }
@@ -282,8 +288,12 @@
     <h5 class="card-title">Message</h5>
     <textarea class="form-control" id="Narrative" placeholder="Enter Email Text"  name="Narrative" rows="5"><?php echo $Narrative;?></textarea>
     <input type=password class="form-control" placeholder="Enter Password" id=frmPassword name=Password value="">
-    <button type=button class='btn btn-success ' style='width:120px' onclick="GenerateGroups();">Generate</button>
-    <button type=button class='btn btn-success ' style='width:120px' onclick="Mail();">Send Email</button>
+    <div class='card-body text-center'>
+    <button type=button class='btn btn-success' style='width:120px' onclick="GenerateGroups();">Generate</button>
+    <?php if ($grp!=0) {
+      echo "<button type=button class='btn btn-success' style='width:120px' onclick='Mail();'>Send Email</button>";
+    }  ?>
+    </div>
   </div>
 </div>
 </form>
