@@ -1,0 +1,9 @@
+{
+  "short_name": "TableTappers",
+  "name": "HGC Table Tappers",
+  "icons": [ {
+    "src": "android-touch-icon.png",
+    "type": "image/png",
+    "sizes": "192x192"
+   } ]
+}
