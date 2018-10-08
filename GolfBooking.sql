@@ -1,94 +1,52 @@
--- phpMyAdmin SQL Dump
--- version 2.11.11.3
--- http://www.phpmyadmin.net
+-- MySQL dump 10.13  Distrib 5.6.40, for linux-glibc2.12 (x86_64)
 --
--- Host: 166.62.8.15
--- Generation Time: Jul 28, 2018 at 04:49 AM
--- Server version: 5.5.51
--- PHP Version: 5.1.6
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
+-- Host: localhost    Database: golfbooking
+-- ------------------------------------------------------
+-- Server version	5.6.40
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES UTF8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Database: `GolfBooking`
+-- Table structure for table `bookinglock`
 --
 
--- --------------------------------------------------------
-
---
--- Table structure for table `BookingLock`
---
-
-CREATE TABLE `BookingLock` (
+DROP TABLE IF EXISTS `bookinglock`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bookinglock` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `BookingDate` date NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
+) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `BookingLock`
+-- Dumping data for table `bookinglock`
 --
 
-INSERT INTO `BookingLock` VALUES(9, '2018-05-23');
-INSERT INTO `BookingLock` VALUES(7, '2018-05-19');
-INSERT INTO `BookingLock` VALUES(8, '2018-05-23');
-INSERT INTO `BookingLock` VALUES(10, '2018-05-26');
-INSERT INTO `BookingLock` VALUES(11, '2018-05-26');
-INSERT INTO `BookingLock` VALUES(12, '2018-06-02');
-INSERT INTO `BookingLock` VALUES(13, '2018-06-13');
-INSERT INTO `BookingLock` VALUES(14, '2018-06-09');
-INSERT INTO `BookingLock` VALUES(15, '2018-06-16');
-INSERT INTO `BookingLock` VALUES(16, '2018-06-16');
-INSERT INTO `BookingLock` VALUES(17, '2018-06-23');
-INSERT INTO `BookingLock` VALUES(18, '2018-06-27');
-INSERT INTO `BookingLock` VALUES(19, '2018-06-30');
-INSERT INTO `BookingLock` VALUES(20, '2018-07-04');
-INSERT INTO `BookingLock` VALUES(21, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(22, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(23, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(24, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(25, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(26, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(27, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(28, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(29, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(30, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(31, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(32, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(33, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(34, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(35, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(36, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(37, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(38, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(39, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(40, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(41, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(42, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(43, '2018-07-07');
-INSERT INTO `BookingLock` VALUES(44, '2018-07-11');
-INSERT INTO `BookingLock` VALUES(46, '2018-07-14');
-INSERT INTO `BookingLock` VALUES(47, '2018-07-18');
-INSERT INTO `BookingLock` VALUES(48, '2018-07-21');
-INSERT INTO `BookingLock` VALUES(49, '2018-07-25');
-INSERT INTO `BookingLock` VALUES(50, '2018-07-28');
-INSERT INTO `BookingLock` VALUES(51, '2018-08-01');
-INSERT INTO `BookingLock` VALUES(52, '2018-08-04');
-INSERT INTO `BookingLock` VALUES(53, '2018-08-04');
-
--- --------------------------------------------------------
+LOCK TABLES `bookinglock` WRITE;
+/*!40000 ALTER TABLE `bookinglock` DISABLE KEYS */;
+INSERT INTO `bookinglock` VALUES (9,'2018-05-23'),(7,'2018-05-19'),(8,'2018-05-23'),(10,'2018-05-26'),(11,'2018-05-26'),(12,'2018-06-02'),(13,'2018-06-13'),(14,'2018-06-09'),(15,'2018-06-16'),(16,'2018-06-16'),(17,'2018-06-23'),(18,'2018-06-27'),(19,'2018-06-30'),(20,'2018-07-04'),(21,'2018-07-07'),(22,'2018-07-07'),(23,'2018-07-07'),(24,'2018-07-07'),(25,'2018-07-07'),(26,'2018-07-07'),(27,'2018-07-07'),(28,'2018-07-07'),(29,'2018-07-07'),(30,'2018-07-07'),(31,'2018-07-07'),(32,'2018-07-07'),(33,'2018-07-07'),(34,'2018-07-07'),(35,'2018-07-07'),(36,'2018-07-07'),(37,'2018-07-07'),(38,'2018-07-07'),(39,'2018-07-07'),(40,'2018-07-07'),(41,'2018-07-07'),(42,'2018-07-07'),(43,'2018-07-07'),(44,'2018-07-11'),(46,'2018-07-14'),(47,'2018-07-18'),(48,'2018-07-21'),(49,'2018-07-25'),(50,'2018-07-28'),(51,'2018-08-01'),(52,'2018-08-04'),(53,'2018-08-04'),(54,'2018-08-08'),(55,'2018-08-11'),(56,'2018-10-10'),(57,'2018-10-06'),(58,'2018-10-06'),(59,'2018-10-10'),(60,'2018-10-10'),(61,'2018-10-10'),(62,'2018-10-10'),(63,'2018-10-10'),(64,'2018-10-10'),(65,'2018-10-10'),(66,'2018-10-17'),(67,'2018-10-13');
+/*!40000 ALTER TABLE `bookinglock` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `Bookings`
+-- Table structure for table `bookings`
 --
 
-CREATE TABLE `Bookings` (
+DROP TABLE IF EXISTS `bookings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bookings` (
   `BookingDate` date NOT NULL,
   `GroupNo` tinyint(4) NOT NULL,
   `PlayerID1` int(5) DEFAULT NULL,
@@ -99,419 +57,51 @@ CREATE TABLE `Bookings` (
   PRIMARY KEY (`BookingDate`,`GroupNo`),
   KEY `Player1` (`PlayerID1`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Booking Groups';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Bookings`
+-- Dumping data for table `bookings`
 --
 
-INSERT INTO `Bookings` VALUES('2018-05-30', 1, 18, 5, 12, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-23', 2, 12, 17, 0, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-26', 4, 8, 27, 25, 18, '');
-INSERT INTO `Bookings` VALUES('2018-05-26', 3, 16, 5, 21, 17, '');
-INSERT INTO `Bookings` VALUES('2018-05-26', 2, 24, 12, 28, 11, '');
-INSERT INTO `Bookings` VALUES('2018-05-30', 2, 17, 10, 6, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-19', 6, 21, 9, 10, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-19', 5, 20, 26, 11, 27, '');
-INSERT INTO `Bookings` VALUES('2018-05-19', 4, 19, 4, 12, 5, '');
-INSERT INTO `Bookings` VALUES('2018-05-19', 3, 18, 6, 13, 14, '');
-INSERT INTO `Bookings` VALUES('2018-05-19', 1, 2, 28, 15, 7, '');
-INSERT INTO `Bookings` VALUES('2018-05-19', 2, 17, 24, 16, 25, '');
-INSERT INTO `Bookings` VALUES('2018-06-16', 3, 18, 28, 21, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-26', 5, 14, 10, 20, 26, '');
-INSERT INTO `Bookings` VALUES('2018-05-12', 6, 6, 24, 9, 19, '');
-INSERT INTO `Bookings` VALUES('2018-05-12', 5, 21, 18, 7, 13, '');
-INSERT INTO `Bookings` VALUES('2018-05-12', 4, 3, 10, 2, 26, '');
-INSERT INTO `Bookings` VALUES('2018-05-12', 3, 28, 4, 8, 15, '');
-INSERT INTO `Bookings` VALUES('2018-05-12', 2, 27, 11, 14, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-12', 1, 20, 5, 17, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-05', 6, 25, 15, 14, 7, '');
-INSERT INTO `Bookings` VALUES('2018-05-05', 5, 11, 12, 17, 24, '');
-INSERT INTO `Bookings` VALUES('2018-05-05', 4, 10, 18, 27, 13, '');
-INSERT INTO `Bookings` VALUES('2018-05-05', 3, 2, 3, 28, 19, '');
-INSERT INTO `Bookings` VALUES('2018-05-05', 2, 8, 4, 6, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-05', 1, 23, 16, 21, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-28', 6, 5, 15, 8, 25, '');
-INSERT INTO `Bookings` VALUES('2018-04-28', 5, 4, 10, 2, 12, '');
-INSERT INTO `Bookings` VALUES('2018-04-28', 4, 9, 23, 17, 13, '');
-INSERT INTO `Bookings` VALUES('2018-04-28', 3, 24, 11, 18, 26, '');
-INSERT INTO `Bookings` VALUES('2018-04-28', 2, 28, 14, 6, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-28', 1, 27, 7, 19, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-21', 6, 19, 4, 5, 24, '');
-INSERT INTO `Bookings` VALUES('2018-04-21', 5, 17, 14, 12, 11, '');
-INSERT INTO `Bookings` VALUES('2018-04-21', 4, 7, 6, 26, 10, '');
-INSERT INTO `Bookings` VALUES('2018-04-21', 3, 25, 28, 8, 9, '');
-INSERT INTO `Bookings` VALUES('2018-04-21', 2, 16, 18, 3, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-21', 1, 21, 27, 20, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-14', 6, 12, 4, 11, 7, '');
-INSERT INTO `Bookings` VALUES('2018-04-14', 5, 3, 28, 17, 27, '');
-INSERT INTO `Bookings` VALUES('2018-04-14', 4, 6, 10, 23, 16, '');
-INSERT INTO `Bookings` VALUES('2018-04-14', 3, 26, 20, 2, 15, '');
-INSERT INTO `Bookings` VALUES('2018-04-14', 2, 13, 9, 19, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-14', 1, 14, 25, 8, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-26', 1, 15, 9, 6, 13, '');
-INSERT INTO `Bookings` VALUES('2018-06-09', 1, 6, 10, 21, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-09', 2, 12, 20, 5, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-09', 3, 8, 18, 16, 27, '');
-INSERT INTO `Bookings` VALUES('2018-06-09', 4, 17, 13, 26, 25, '');
-INSERT INTO `Bookings` VALUES('2018-06-16', 1, 13, 2, 12, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-06', 2, 5, 12, 18, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-06', 1, 6, 10, 17, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-13', 1, 17, 5, 6, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-13', 2, 12, 10, 0, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-23', 1, 5, 18, 10, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-02', 1, 10, 6, 16, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-02', 2, 5, 20, 12, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-02', 3, 9, 27, 24, 8, '');
-INSERT INTO `Bookings` VALUES('2018-06-02', 4, 13, 15, 28, 18, '');
-INSERT INTO `Bookings` VALUES('2018-06-02', 5, 26, 25, 17, 14, '');
-INSERT INTO `Bookings` VALUES('2018-06-16', 2, 5, 20, 9, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-11', 1, 17, 2, 18, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-11', 2, 6, 3, 5, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-11', 3, 23, 10, 12, 7, '');
-INSERT INTO `Bookings` VALUES('2018-04-18', 1, 5, 17, 7, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-18', 2, 10, 6, 3, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-18', 3, 2, 12, 18, 23, '');
-INSERT INTO `Bookings` VALUES('2018-04-25', 1, 7, 17, 6, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-25', 2, 18, 12, 5, 0, '');
-INSERT INTO `Bookings` VALUES('2018-04-25', 3, 3, 10, 23, 2, '');
-INSERT INTO `Bookings` VALUES('2018-05-02', 1, 12, 2, 23, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-02', 2, 17, 6, 7, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-02', 3, 10, 3, 5, 18, '');
-INSERT INTO `Bookings` VALUES('2018-05-09', 1, 6, 23, 10, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-09', 2, 7, 18, 12, 0, '');
-INSERT INTO `Bookings` VALUES('2018-05-09', 3, 3, 5, 2, 17, '');
-INSERT INTO `Bookings` VALUES('2018-05-16', 1, 2, 10, 12, 3, '');
-INSERT INTO `Bookings` VALUES('2018-05-16', 2, 18, 6, 5, 17, '');
-INSERT INTO `Bookings` VALUES('2018-04-14', 7, 18, 21, 5, 24, '');
-INSERT INTO `Bookings` VALUES('2018-04-21', 7, 15, 2, 23, 13, '');
-INSERT INTO `Bookings` VALUES('2018-04-28', 7, 20, 16, 21, 3, '');
-INSERT INTO `Bookings` VALUES('2018-05-05', 7, 26, 20, 9, 5, '');
-INSERT INTO `Bookings` VALUES('2018-05-12', 7, 12, 23, 25, 16, '');
-INSERT INTO `Bookings` VALUES('2018-07-07', 2, 9, 23, 5, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-07', 1, 15, 17, 6, 21, '');
-INSERT INTO `Bookings` VALUES('2018-06-30', 5, 21, 28, 15, 10, '');
-INSERT INTO `Bookings` VALUES('2018-06-30', 4, 5, 18, 25, 26, '');
-INSERT INTO `Bookings` VALUES('2018-06-30', 3, 27, 20, 9, 8, '');
-INSERT INTO `Bookings` VALUES('2018-06-30', 2, 16, 13, 3, 24, '');
-INSERT INTO `Bookings` VALUES('2018-06-30', 1, 4, 2, 12, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-20', 1, 3, 5, 2, 6, '');
-INSERT INTO `Bookings` VALUES('2018-06-20', 2, 10, 12, 17, 18, '');
-INSERT INTO `Bookings` VALUES('2018-06-16', 4, 10, 7, 24, 8, '');
-INSERT INTO `Bookings` VALUES('2018-06-16', 5, 26, 16, 6, 14, '');
-INSERT INTO `Bookings` VALUES('2018-06-23', 4, 2, 10, 3, 16, '');
-INSERT INTO `Bookings` VALUES('2018-06-23', 3, 14, 5, 18, 8, '');
-INSERT INTO `Bookings` VALUES('2018-06-23', 2, 24, 17, 13, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-23', 1, 28, 27, 26, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-23', 5, 25, 4, 21, 6, '');
-INSERT INTO `Bookings` VALUES('2018-06-27', 1, 18, 17, 2, 0, '');
-INSERT INTO `Bookings` VALUES('2018-06-27', 2, 12, 3, 10, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-07', 3, 24, 2, 27, 16, '');
-INSERT INTO `Bookings` VALUES('2018-07-07', 4, 12, 28, 7, 13, '');
-INSERT INTO `Bookings` VALUES('2018-07-07', 5, 20, 26, 4, 25, '');
-INSERT INTO `Bookings` VALUES('2018-07-04', 1, 2, 5, 7, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-04', 2, 3, 12, 17, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-14', 3, 2, 12, 14, 21, '');
-INSERT INTO `Bookings` VALUES('2018-07-14', 2, 28, 6, 20, 13, '');
-INSERT INTO `Bookings` VALUES('2018-07-14', 1, 4, 17, 24, 16, '');
-INSERT INTO `Bookings` VALUES('2018-07-11', 1, 5, 2, 6, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-11', 2, 12, 17, 0, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-18', 1, 2, 5, 12, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-14', 4, 25, 5, 15, 26, '');
-INSERT INTO `Bookings` VALUES('2018-07-18', 2, 17, 3, 0, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-21', 1, 14, 17, 3, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-21', 2, 16, 20, 12, 21, '');
-INSERT INTO `Bookings` VALUES('2018-07-21', 3, 13, 9, 6, 2, '');
-INSERT INTO `Bookings` VALUES('2018-07-21', 4, 15, 10, 5, 4, '');
-INSERT INTO `Bookings` VALUES('2018-07-25', 1, 3, 6, 2, 17, '');
-INSERT INTO `Bookings` VALUES('2018-07-25', 2, 5, 12, 10, 18, '');
-INSERT INTO `Bookings` VALUES('2018-07-28', 1, 3, 21, 14, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-28', 2, 17, 24, 4, 0, '');
-INSERT INTO `Bookings` VALUES('2018-07-28', 3, 10, 12, 15, 5, '');
-INSERT INTO `Bookings` VALUES('2018-07-28', 4, 6, 27, 18, 20, '');
-INSERT INTO `Bookings` VALUES('2018-07-28', 5, 9, 16, 13, 2, '');
-INSERT INTO `Bookings` VALUES('2018-08-01', 1, 10, 5, 18, 0, '');
-INSERT INTO `Bookings` VALUES('2018-08-01', 2, 2, 12, 3, 0, '');
-INSERT INTO `Bookings` VALUES('2018-08-04', 1, 18, 10, 9, 6, '');
-INSERT INTO `Bookings` VALUES('2018-08-04', 2, 27, 12, 20, 3, '');
-INSERT INTO `Bookings` VALUES('2018-08-04', 3, 4, 2, 16, 25, '');
-INSERT INTO `Bookings` VALUES('2018-08-04', 4, 5, 26, 21, 24, '');
-INSERT INTO `Bookings` VALUES('2018-08-04', 5, 13, 15, 14, 17, '');
-
--- --------------------------------------------------------
+LOCK TABLES `bookings` WRITE;
+/*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
+INSERT INTO `bookings` VALUES ('2018-05-30',1,18,5,12,0,''),('2018-05-23',2,12,17,0,0,''),('2018-05-26',4,8,27,25,18,''),('2018-05-26',3,16,5,21,17,''),('2018-05-26',2,24,12,28,11,''),('2018-05-30',2,17,10,6,0,''),('2018-05-19',6,21,9,10,0,''),('2018-05-19',5,20,26,11,27,''),('2018-05-19',4,19,4,12,5,''),('2018-05-19',3,18,6,13,14,''),('2018-05-19',1,2,28,15,7,''),('2018-05-19',2,17,24,16,25,''),('2018-06-16',3,18,28,21,0,''),('2018-05-26',5,14,10,20,26,''),('2018-05-12',6,6,24,9,19,''),('2018-05-12',5,21,18,7,13,''),('2018-05-12',4,3,10,2,26,''),('2018-05-12',3,28,4,8,15,''),('2018-05-12',2,27,11,14,0,''),('2018-05-12',1,20,5,17,0,''),('2018-05-05',6,25,15,14,7,''),('2018-05-05',5,11,12,17,24,''),('2018-05-05',4,10,18,27,13,''),('2018-05-05',3,2,3,28,19,''),('2018-05-05',2,8,4,6,0,''),('2018-05-05',1,23,16,21,0,''),('2018-04-28',6,5,15,8,25,''),('2018-04-28',5,4,10,2,12,''),('2018-04-28',4,9,23,17,13,''),('2018-04-28',3,24,11,18,26,''),('2018-04-28',2,28,14,6,0,''),('2018-04-28',1,27,7,19,0,''),('2018-04-21',6,19,4,5,24,''),('2018-04-21',5,17,14,12,11,''),('2018-04-21',4,7,6,26,10,''),('2018-04-21',3,25,28,8,9,''),('2018-04-21',2,16,18,3,0,''),('2018-04-21',1,21,27,20,0,''),('2018-04-14',6,12,4,11,7,''),('2018-04-14',5,3,28,17,27,''),('2018-04-14',4,6,10,23,16,''),('2018-04-14',3,26,20,2,15,''),('2018-04-14',2,13,9,19,0,''),('2018-04-14',1,14,25,8,0,''),('2018-05-26',1,15,9,6,13,''),('2018-06-09',1,6,10,21,0,''),('2018-06-09',2,12,20,5,0,''),('2018-06-09',3,8,18,16,27,''),('2018-06-09',4,17,13,26,25,''),('2018-06-16',1,13,2,12,0,''),('2018-06-06',2,5,12,18,0,''),('2018-06-06',1,6,10,17,0,''),('2018-06-13',1,17,5,6,0,''),('2018-06-13',2,12,10,0,0,''),('2018-05-23',1,5,18,10,0,''),('2018-06-02',1,10,6,16,0,''),('2018-06-02',2,5,20,12,0,''),('2018-06-02',3,9,27,24,8,''),('2018-06-02',4,13,15,28,18,''),('2018-06-02',5,26,25,17,14,''),('2018-06-16',2,5,20,9,0,''),('2018-04-11',1,17,2,18,0,''),('2018-04-11',2,6,3,5,0,''),('2018-04-11',3,23,10,12,7,''),('2018-04-18',1,5,17,7,0,''),('2018-04-18',2,10,6,3,0,''),('2018-04-18',3,2,12,18,23,''),('2018-04-25',1,7,17,6,0,''),('2018-04-25',2,18,12,5,0,''),('2018-04-25',3,3,10,23,2,''),('2018-05-02',1,12,2,23,0,''),('2018-05-02',2,17,6,7,0,''),('2018-05-02',3,10,3,5,18,''),('2018-05-09',1,6,23,10,0,''),('2018-05-09',2,7,18,12,0,''),('2018-05-09',3,3,5,2,17,''),('2018-05-16',1,2,10,12,3,''),('2018-05-16',2,18,6,5,17,''),('2018-04-14',7,18,21,5,24,''),('2018-04-21',7,15,2,23,13,''),('2018-04-28',7,20,16,21,3,''),('2018-05-05',7,26,20,9,5,''),('2018-05-12',7,12,23,25,16,''),('2018-07-07',2,9,23,5,0,''),('2018-07-07',1,15,17,6,21,''),('2018-06-30',5,21,28,15,10,''),('2018-06-30',4,5,18,25,26,''),('2018-06-30',3,27,20,9,8,''),('2018-06-30',2,16,13,3,24,''),('2018-06-30',1,4,2,12,0,''),('2018-06-20',1,3,5,2,6,''),('2018-06-20',2,10,12,17,18,''),('2018-06-16',4,10,7,24,8,''),('2018-06-16',5,26,16,6,14,''),('2018-06-23',4,2,10,3,16,''),('2018-06-23',3,14,5,18,8,''),('2018-06-23',2,24,17,13,0,''),('2018-06-23',1,28,27,26,0,''),('2018-06-23',5,25,4,21,6,''),('2018-06-27',1,18,17,2,0,''),('2018-06-27',2,12,3,10,0,''),('2018-07-07',3,24,2,27,16,''),('2018-07-07',4,12,28,7,13,''),('2018-07-07',5,20,26,4,25,''),('2018-07-04',1,2,5,7,0,''),('2018-07-04',2,3,12,17,0,''),('2018-07-14',3,2,12,14,21,''),('2018-07-14',2,28,6,20,13,''),('2018-07-14',1,4,17,24,16,''),('2018-07-11',1,5,2,6,0,''),('2018-07-11',2,12,17,0,0,''),('2018-07-18',1,2,5,12,0,''),('2018-07-14',4,25,5,15,26,''),('2018-07-18',2,17,3,0,0,''),('2018-07-21',1,14,17,3,0,''),('2018-07-21',2,16,20,12,21,''),('2018-07-21',3,13,9,6,2,''),('2018-07-21',4,15,10,5,4,''),('2018-07-25',1,3,6,2,17,''),('2018-07-25',2,5,12,10,18,''),('2018-07-28',1,3,21,14,0,''),('2018-07-28',2,17,24,4,0,''),('2018-07-28',3,10,12,15,5,''),('2018-07-28',4,6,27,18,20,''),('2018-07-28',5,9,16,13,2,''),('2018-08-01',1,10,5,18,0,''),('2018-08-01',2,2,12,3,0,''),('2018-08-04',1,18,10,9,6,''),('2018-08-04',2,27,12,20,3,''),('2018-08-04',3,4,2,16,25,''),('2018-08-04',4,5,26,21,24,''),('2018-08-04',5,13,15,14,17,''),('2018-08-08',1,18,6,10,0,''),('2018-08-08',2,3,2,17,0,''),('2018-08-11',1,3,16,23,0,''),('2018-08-11',2,26,24,21,0,''),('2018-08-11',3,15,4,9,19,''),('2018-08-11',4,17,14,6,2,''),('2018-08-11',5,20,25,10,13,''),('2018-10-10',1,24,5,2,10,''),('2018-10-10',2,6,12,17,7,''),('2018-10-06',1,29,5,6,0,''),('2018-10-06',2,11,17,7,0,''),('2018-10-06',3,23,14,2,26,''),('2018-10-06',4,8,9,20,24,''),('2018-10-06',5,16,13,10,12,''),('2018-10-06',6,25,27,3,4,''),('2018-10-13',1,7,20,14,0,''),('2018-10-13',2,4,13,17,0,''),('2018-10-13',3,3,16,26,0,''),('2018-10-13',4,12,6,8,9,''),('2018-10-13',5,10,23,5,2,''),('2018-10-17',1,7,23,24,0,''),('2018-10-17',2,10,12,17,0,''),('2018-10-17',3,5,2,3,0,''),('2018-10-20',5,5,7,17,27,''),('2018-10-20',4,20,8,26,3,''),('2018-10-20',3,13,10,18,25,''),('2018-10-20',2,9,12,15,0,''),('2018-10-20',1,6,21,4,0,'');
+/*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `PlayerNotAvailable`
+-- Table structure for table `playernotavailable`
 --
 
-CREATE TABLE `PlayerNotAvailable` (
+DROP TABLE IF EXISTS `playernotavailable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `playernotavailable` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `PlayerID` int(5) NOT NULL,
   `BookingDate` date NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=401 ;
+) ENGINE=MyISAM AUTO_INCREMENT=521 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `PlayerNotAvailable`
+-- Dumping data for table `playernotavailable`
 --
 
-INSERT INTO `PlayerNotAvailable` VALUES(15, 3, '2018-05-26');
-INSERT INTO `PlayerNotAvailable` VALUES(42, 3, '2018-05-23');
-INSERT INTO `PlayerNotAvailable` VALUES(68, 7, '2018-07-11');
-INSERT INTO `PlayerNotAvailable` VALUES(85, 2, '2018-05-26');
-INSERT INTO `PlayerNotAvailable` VALUES(88, 2, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(39, 4, '2018-05-19');
-INSERT INTO `PlayerNotAvailable` VALUES(16, 3, '2018-06-02');
-INSERT INTO `PlayerNotAvailable` VALUES(17, 2, '2018-05-23');
-INSERT INTO `PlayerNotAvailable` VALUES(18, 2, '2018-05-30');
-INSERT INTO `PlayerNotAvailable` VALUES(19, 2, '2018-06-06');
-INSERT INTO `PlayerNotAvailable` VALUES(20, 2, '2018-06-13');
-INSERT INTO `PlayerNotAvailable` VALUES(21, 7, '2018-05-16');
-INSERT INTO `PlayerNotAvailable` VALUES(22, 7, '2018-05-23');
-INSERT INTO `PlayerNotAvailable` VALUES(23, 7, '2018-05-30');
-INSERT INTO `PlayerNotAvailable` VALUES(24, 7, '2018-06-06');
-INSERT INTO `PlayerNotAvailable` VALUES(25, 7, '2018-06-13');
-INSERT INTO `PlayerNotAvailable` VALUES(26, 7, '2018-06-20');
-INSERT INTO `PlayerNotAvailable` VALUES(109, 23, '2018-05-16');
-INSERT INTO `PlayerNotAvailable` VALUES(110, 23, '2018-05-23');
-INSERT INTO `PlayerNotAvailable` VALUES(111, 23, '2018-05-30');
-INSERT INTO `PlayerNotAvailable` VALUES(30, 23, '2018-06-06');
-INSERT INTO `PlayerNotAvailable` VALUES(31, 23, '2018-06-13');
-INSERT INTO `PlayerNotAvailable` VALUES(32, 23, '2018-06-20');
-INSERT INTO `PlayerNotAvailable` VALUES(33, 23, '2018-06-27');
-INSERT INTO `PlayerNotAvailable` VALUES(34, 23, '2018-07-04');
-INSERT INTO `PlayerNotAvailable` VALUES(35, 23, '2018-07-11');
-INSERT INTO `PlayerNotAvailable` VALUES(132, 2, '2018-06-02');
-INSERT INTO `PlayerNotAvailable` VALUES(38, 3, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(156, 4, '2018-05-26');
-INSERT INTO `PlayerNotAvailable` VALUES(47, 4, '2018-06-02');
-INSERT INTO `PlayerNotAvailable` VALUES(43, 3, '2018-05-30');
-INSERT INTO `PlayerNotAvailable` VALUES(44, 3, '2018-06-06');
-INSERT INTO `PlayerNotAvailable` VALUES(69, 7, '2018-07-18');
-INSERT INTO `PlayerNotAvailable` VALUES(50, 7, '2018-05-19');
-INSERT INTO `PlayerNotAvailable` VALUES(51, 7, '2018-05-26');
-INSERT INTO `PlayerNotAvailable` VALUES(52, 7, '2018-06-02');
-INSERT INTO `PlayerNotAvailable` VALUES(53, 7, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(56, 6, '2018-05-23');
-INSERT INTO `PlayerNotAvailable` VALUES(57, 23, '2018-05-19');
-INSERT INTO `PlayerNotAvailable` VALUES(58, 23, '2018-05-26');
-INSERT INTO `PlayerNotAvailable` VALUES(59, 23, '2018-06-02');
-INSERT INTO `PlayerNotAvailable` VALUES(60, 23, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(61, 23, '2018-06-16');
-INSERT INTO `PlayerNotAvailable` VALUES(62, 23, '2018-06-23');
-INSERT INTO `PlayerNotAvailable` VALUES(163, 6, '2018-07-04');
-INSERT INTO `PlayerNotAvailable` VALUES(71, 7, '2018-07-25');
-INSERT INTO `PlayerNotAvailable` VALUES(72, 7, '2018-08-01');
-INSERT INTO `PlayerNotAvailable` VALUES(93, 2, '2018-05-19');
-INSERT INTO `PlayerNotAvailable` VALUES(95, 10, '2018-05-19');
-INSERT INTO `PlayerNotAvailable` VALUES(136, 17, '2018-06-16');
-INSERT INTO `PlayerNotAvailable` VALUES(190, 17, '2018-06-13');
-INSERT INTO `PlayerNotAvailable` VALUES(102, 7, '2018-06-27');
-INSERT INTO `PlayerNotAvailable` VALUES(280, 5, '2018-08-18');
-INSERT INTO `PlayerNotAvailable` VALUES(112, 18, '2018-05-19');
-INSERT INTO `PlayerNotAvailable` VALUES(115, 19, '2018-05-19');
-INSERT INTO `PlayerNotAvailable` VALUES(116, 19, '2018-05-26');
-INSERT INTO `PlayerNotAvailable` VALUES(117, 19, '2018-06-02');
-INSERT INTO `PlayerNotAvailable` VALUES(118, 19, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(119, 19, '2018-06-16');
-INSERT INTO `PlayerNotAvailable` VALUES(120, 19, '2018-06-23');
-INSERT INTO `PlayerNotAvailable` VALUES(121, 19, '2018-06-30');
-INSERT INTO `PlayerNotAvailable` VALUES(122, 19, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(123, 19, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(124, 19, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(125, 19, '2018-07-28');
-INSERT INTO `PlayerNotAvailable` VALUES(126, 19, '2018-08-04');
-INSERT INTO `PlayerNotAvailable` VALUES(128, 11, '2018-05-26');
-INSERT INTO `PlayerNotAvailable` VALUES(129, 21, '2018-06-02');
-INSERT INTO `PlayerNotAvailable` VALUES(133, 11, '2018-06-02');
-INSERT INTO `PlayerNotAvailable` VALUES(246, 17, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(138, 17, '2018-06-30');
-INSERT INTO `PlayerNotAvailable` VALUES(142, 28, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(143, 8, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(144, 8, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(145, 8, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(146, 8, '2018-07-28');
-INSERT INTO `PlayerNotAvailable` VALUES(147, 8, '2018-08-04');
-INSERT INTO `PlayerNotAvailable` VALUES(148, 8, '2018-08-11');
-INSERT INTO `PlayerNotAvailable` VALUES(152, 6, '2018-06-13');
-INSERT INTO `PlayerNotAvailable` VALUES(154, 6, '2018-06-20');
-INSERT INTO `PlayerNotAvailable` VALUES(157, 10, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(253, 5, '2018-06-27');
-INSERT INTO `PlayerNotAvailable` VALUES(189, 11, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(166, 11, '2018-06-16');
-INSERT INTO `PlayerNotAvailable` VALUES(254, 27, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(168, 11, '2018-06-30');
-INSERT INTO `PlayerNotAvailable` VALUES(169, 11, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(170, 11, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(171, 11, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(172, 11, '2018-07-28');
-INSERT INTO `PlayerNotAvailable` VALUES(173, 11, '2018-08-04');
-INSERT INTO `PlayerNotAvailable` VALUES(174, 11, '2018-08-11');
-INSERT INTO `PlayerNotAvailable` VALUES(176, 8, '2018-08-18');
-INSERT INTO `PlayerNotAvailable` VALUES(177, 10, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(178, 6, '2018-07-18');
-INSERT INTO `PlayerNotAvailable` VALUES(180, 6, '2018-08-01');
-INSERT INTO `PlayerNotAvailable` VALUES(181, 6, '2018-08-15');
-INSERT INTO `PlayerNotAvailable` VALUES(239, 7, '2018-08-22');
-INSERT INTO `PlayerNotAvailable` VALUES(183, 4, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(184, 4, '2018-06-16');
-INSERT INTO `PlayerNotAvailable` VALUES(185, 9, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(186, 15, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(187, 14, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(188, 24, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(248, 2, '2018-06-20');
-INSERT INTO `PlayerNotAvailable` VALUES(193, 12, '2018-06-23');
-INSERT INTO `PlayerNotAvailable` VALUES(194, 14, '2018-06-30');
-INSERT INTO `PlayerNotAvailable` VALUES(197, 16, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(198, 18, '2018-07-04');
-INSERT INTO `PlayerNotAvailable` VALUES(199, 18, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(200, 18, '2018-07-11');
-INSERT INTO `PlayerNotAvailable` VALUES(201, 18, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(202, 18, '2018-07-18');
-INSERT INTO `PlayerNotAvailable` VALUES(203, 18, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(204, 18, '2018-09-05');
-INSERT INTO `PlayerNotAvailable` VALUES(205, 18, '2018-09-08');
-INSERT INTO `PlayerNotAvailable` VALUES(206, 18, '2018-09-12');
-INSERT INTO `PlayerNotAvailable` VALUES(207, 18, '2018-09-15');
-INSERT INTO `PlayerNotAvailable` VALUES(208, 18, '2018-09-19');
-INSERT INTO `PlayerNotAvailable` VALUES(209, 18, '2018-09-22');
-INSERT INTO `PlayerNotAvailable` VALUES(210, 18, '2018-09-26');
-INSERT INTO `PlayerNotAvailable` VALUES(211, 18, '2018-09-29');
-INSERT INTO `PlayerNotAvailable` VALUES(212, 18, '2018-10-03');
-INSERT INTO `PlayerNotAvailable` VALUES(213, 18, '2018-10-06');
-INSERT INTO `PlayerNotAvailable` VALUES(214, 18, '2018-10-10');
-INSERT INTO `PlayerNotAvailable` VALUES(215, 18, '2018-10-13');
-INSERT INTO `PlayerNotAvailable` VALUES(216, 18, '2018-10-17');
-INSERT INTO `PlayerNotAvailable` VALUES(217, 9, '2018-08-18');
-INSERT INTO `PlayerNotAvailable` VALUES(329, 24, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(315, 23, '2018-08-08');
-INSERT INTO `PlayerNotAvailable` VALUES(221, 7, '2018-08-11');
-INSERT INTO `PlayerNotAvailable` VALUES(233, 27, '2018-06-16');
-INSERT INTO `PlayerNotAvailable` VALUES(240, 10, '2018-07-04');
-INSERT INTO `PlayerNotAvailable` VALUES(224, 14, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(225, 14, '2018-09-29');
-INSERT INTO `PlayerNotAvailable` VALUES(226, 26, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(227, 26, '2018-07-28');
-INSERT INTO `PlayerNotAvailable` VALUES(249, 25, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(250, 25, '2018-07-28');
-INSERT INTO `PlayerNotAvailable` VALUES(231, 24, '2018-10-20');
-INSERT INTO `PlayerNotAvailable` VALUES(235, 15, '2018-06-16');
-INSERT INTO `PlayerNotAvailable` VALUES(236, 15, '2018-06-23');
-INSERT INTO `PlayerNotAvailable` VALUES(237, 6, '2018-06-30');
-INSERT INTO `PlayerNotAvailable` VALUES(238, 6, '2018-06-27');
-INSERT INTO `PlayerNotAvailable` VALUES(241, 10, '2018-07-11');
-INSERT INTO `PlayerNotAvailable` VALUES(242, 10, '2018-07-18');
-INSERT INTO `PlayerNotAvailable` VALUES(244, 20, '2018-06-23');
-INSERT INTO `PlayerNotAvailable` VALUES(251, 9, '2018-06-16');
-INSERT INTO `PlayerNotAvailable` VALUES(247, 17, '2018-06-06');
-INSERT INTO `PlayerNotAvailable` VALUES(252, 9, '2018-06-23');
-INSERT INTO `PlayerNotAvailable` VALUES(255, 27, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(256, 26, '2018-06-09');
-INSERT INTO `PlayerNotAvailable` VALUES(261, 3, '2018-06-23');
-INSERT INTO `PlayerNotAvailable` VALUES(258, 11, '2018-06-23');
-INSERT INTO `PlayerNotAvailable` VALUES(259, 7, '2018-06-23');
-INSERT INTO `PlayerNotAvailable` VALUES(262, 3, '2018-07-11');
-INSERT INTO `PlayerNotAvailable` VALUES(330, 24, '2018-12-29');
-INSERT INTO `PlayerNotAvailable` VALUES(264, 3, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(265, 3, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(266, 15, '2018-09-15');
-INSERT INTO `PlayerNotAvailable` VALUES(267, 15, '2018-09-22');
-INSERT INTO `PlayerNotAvailable` VALUES(268, 15, '2018-09-29');
-INSERT INTO `PlayerNotAvailable` VALUES(269, 15, '2018-10-06');
-INSERT INTO `PlayerNotAvailable` VALUES(270, 15, '2018-10-13');
-INSERT INTO `PlayerNotAvailable` VALUES(271, 11, '2018-08-18');
-INSERT INTO `PlayerNotAvailable` VALUES(272, 11, '2018-08-25');
-INSERT INTO `PlayerNotAvailable` VALUES(273, 11, '2018-09-01');
-INSERT INTO `PlayerNotAvailable` VALUES(274, 11, '2018-09-08');
-INSERT INTO `PlayerNotAvailable` VALUES(279, 7, '2018-06-30');
-INSERT INTO `PlayerNotAvailable` VALUES(285, 7, '2018-07-04');
-INSERT INTO `PlayerNotAvailable` VALUES(277, 23, '2018-06-30');
-INSERT INTO `PlayerNotAvailable` VALUES(331, 3, '2018-09-29');
-INSERT INTO `PlayerNotAvailable` VALUES(281, 5, '2018-08-25');
-INSERT INTO `PlayerNotAvailable` VALUES(319, 5, '2018-08-08');
-INSERT INTO `PlayerNotAvailable` VALUES(324, 5, '2018-09-01');
-INSERT INTO `PlayerNotAvailable` VALUES(284, 5, '2018-08-11');
-INSERT INTO `PlayerNotAvailable` VALUES(286, 7, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(287, 7, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(288, 7, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(289, 7, '2018-07-28');
-INSERT INTO `PlayerNotAvailable` VALUES(290, 7, '2018-08-04');
-INSERT INTO `PlayerNotAvailable` VALUES(291, 7, '2018-08-08');
-INSERT INTO `PlayerNotAvailable` VALUES(292, 7, '2018-08-15');
-INSERT INTO `PlayerNotAvailable` VALUES(293, 7, '2018-08-18');
-INSERT INTO `PlayerNotAvailable` VALUES(294, 7, '2018-08-25');
-INSERT INTO `PlayerNotAvailable` VALUES(295, 7, '2018-08-29');
-INSERT INTO `PlayerNotAvailable` VALUES(296, 7, '2018-09-01');
-INSERT INTO `PlayerNotAvailable` VALUES(297, 7, '2018-09-05');
-INSERT INTO `PlayerNotAvailable` VALUES(298, 7, '2018-09-08');
-INSERT INTO `PlayerNotAvailable` VALUES(299, 7, '2018-09-12');
-INSERT INTO `PlayerNotAvailable` VALUES(300, 7, '2018-09-15');
-INSERT INTO `PlayerNotAvailable` VALUES(301, 7, '2018-09-19');
-INSERT INTO `PlayerNotAvailable` VALUES(302, 7, '2018-09-22');
-INSERT INTO `PlayerNotAvailable` VALUES(303, 7, '2018-09-26');
-INSERT INTO `PlayerNotAvailable` VALUES(304, 7, '2018-09-29');
-INSERT INTO `PlayerNotAvailable` VALUES(305, 7, '2018-10-03');
-INSERT INTO `PlayerNotAvailable` VALUES(306, 23, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(307, 23, '2018-07-18');
-INSERT INTO `PlayerNotAvailable` VALUES(308, 23, '2018-07-25');
-INSERT INTO `PlayerNotAvailable` VALUES(309, 23, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(310, 23, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(312, 9, '2018-11-03');
-INSERT INTO `PlayerNotAvailable` VALUES(313, 23, '2018-08-01');
-INSERT INTO `PlayerNotAvailable` VALUES(314, 23, '2018-07-28');
-INSERT INTO `PlayerNotAvailable` VALUES(316, 23, '2018-08-04');
-INSERT INTO `PlayerNotAvailable` VALUES(397, 5, '2018-08-04');
-INSERT INTO `PlayerNotAvailable` VALUES(320, 5, '2018-08-15');
-INSERT INTO `PlayerNotAvailable` VALUES(321, 5, '2018-08-22');
-INSERT INTO `PlayerNotAvailable` VALUES(323, 5, '2018-08-29');
-INSERT INTO `PlayerNotAvailable` VALUES(327, 9, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(328, 9, '2018-07-07');
-INSERT INTO `PlayerNotAvailable` VALUES(332, 3, '2018-10-03');
-INSERT INTO `PlayerNotAvailable` VALUES(383, 12, '2018-08-08');
-INSERT INTO `PlayerNotAvailable` VALUES(382, 21, '2018-10-13');
-INSERT INTO `PlayerNotAvailable` VALUES(381, 21, '2018-10-06');
-INSERT INTO `PlayerNotAvailable` VALUES(380, 21, '2018-09-29');
-INSERT INTO `PlayerNotAvailable` VALUES(400, 21, '2018-08-25');
-INSERT INTO `PlayerNotAvailable` VALUES(378, 9, '2019-01-05');
-INSERT INTO `PlayerNotAvailable` VALUES(377, 9, '2018-12-29');
-INSERT INTO `PlayerNotAvailable` VALUES(374, 28, '2018-10-20');
-INSERT INTO `PlayerNotAvailable` VALUES(376, 9, '2018-09-29');
-INSERT INTO `PlayerNotAvailable` VALUES(375, 28, '2018-10-27');
-INSERT INTO `PlayerNotAvailable` VALUES(373, 28, '2018-10-13');
-INSERT INTO `PlayerNotAvailable` VALUES(372, 28, '2018-10-06');
-INSERT INTO `PlayerNotAvailable` VALUES(371, 28, '2018-09-29');
-INSERT INTO `PlayerNotAvailable` VALUES(370, 28, '2018-09-22');
-INSERT INTO `PlayerNotAvailable` VALUES(369, 28, '2018-09-15');
-INSERT INTO `PlayerNotAvailable` VALUES(368, 28, '2018-09-08');
-INSERT INTO `PlayerNotAvailable` VALUES(367, 28, '2018-09-01');
-INSERT INTO `PlayerNotAvailable` VALUES(366, 28, '2018-08-25');
-INSERT INTO `PlayerNotAvailable` VALUES(365, 28, '2018-08-18');
-INSERT INTO `PlayerNotAvailable` VALUES(364, 28, '2018-08-11');
-INSERT INTO `PlayerNotAvailable` VALUES(363, 28, '2018-08-04');
-INSERT INTO `PlayerNotAvailable` VALUES(362, 28, '2018-07-28');
-INSERT INTO `PlayerNotAvailable` VALUES(359, 28, '2018-12-15');
-INSERT INTO `PlayerNotAvailable` VALUES(384, 12, '2018-08-11');
-INSERT INTO `PlayerNotAvailable` VALUES(361, 28, '2018-07-21');
-INSERT INTO `PlayerNotAvailable` VALUES(360, 28, '2018-07-14');
-INSERT INTO `PlayerNotAvailable` VALUES(385, 12, '2018-08-15');
-INSERT INTO `PlayerNotAvailable` VALUES(386, 12, '2018-08-18');
-INSERT INTO `PlayerNotAvailable` VALUES(387, 12, '2018-08-22');
-INSERT INTO `PlayerNotAvailable` VALUES(388, 6, '2018-08-29');
-INSERT INTO `PlayerNotAvailable` VALUES(389, 6, '2018-09-12');
-INSERT INTO `PlayerNotAvailable` VALUES(390, 6, '2018-09-26');
-INSERT INTO `PlayerNotAvailable` VALUES(391, 17, '2018-08-01');
-INSERT INTO `PlayerNotAvailable` VALUES(394, 10, '2018-08-15');
-INSERT INTO `PlayerNotAvailable` VALUES(395, 10, '2018-08-25');
-INSERT INTO `PlayerNotAvailable` VALUES(396, 10, '2018-09-19');
-INSERT INTO `PlayerNotAvailable` VALUES(398, 2, '2018-12-01');
-INSERT INTO `PlayerNotAvailable` VALUES(399, 2, '2018-11-28');
-
--- --------------------------------------------------------
+LOCK TABLES `playernotavailable` WRITE;
+/*!40000 ALTER TABLE `playernotavailable` DISABLE KEYS */;
+INSERT INTO `playernotavailable` VALUES (15,3,'2018-05-26'),(42,3,'2018-05-23'),(68,7,'2018-07-11'),(85,2,'2018-05-26'),(88,2,'2018-06-09'),(39,4,'2018-05-19'),(16,3,'2018-06-02'),(17,2,'2018-05-23'),(18,2,'2018-05-30'),(19,2,'2018-06-06'),(20,2,'2018-06-13'),(21,7,'2018-05-16'),(22,7,'2018-05-23'),(23,7,'2018-05-30'),(24,7,'2018-06-06'),(25,7,'2018-06-13'),(26,7,'2018-06-20'),(109,23,'2018-05-16'),(110,23,'2018-05-23'),(111,23,'2018-05-30'),(30,23,'2018-06-06'),(31,23,'2018-06-13'),(32,23,'2018-06-20'),(33,23,'2018-06-27'),(34,23,'2018-07-04'),(35,23,'2018-07-11'),(132,2,'2018-06-02'),(38,3,'2018-06-09'),(156,4,'2018-05-26'),(47,4,'2018-06-02'),(43,3,'2018-05-30'),(44,3,'2018-06-06'),(69,7,'2018-07-18'),(50,7,'2018-05-19'),(51,7,'2018-05-26'),(52,7,'2018-06-02'),(53,7,'2018-06-09'),(56,6,'2018-05-23'),(57,23,'2018-05-19'),(58,23,'2018-05-26'),(59,23,'2018-06-02'),(60,23,'2018-06-09'),(61,23,'2018-06-16'),(62,23,'2018-06-23'),(163,6,'2018-07-04'),(71,7,'2018-07-25'),(72,7,'2018-08-01'),(93,2,'2018-05-19'),(95,10,'2018-05-19'),(136,17,'2018-06-16'),(190,17,'2018-06-13'),(102,7,'2018-06-27'),(280,5,'2018-08-18'),(112,18,'2018-05-19'),(115,19,'2018-05-19'),(116,19,'2018-05-26'),(117,19,'2018-06-02'),(118,19,'2018-06-09'),(119,19,'2018-06-16'),(120,19,'2018-06-23'),(121,19,'2018-06-30'),(122,19,'2018-07-14'),(123,19,'2018-07-07'),(124,19,'2018-07-21'),(125,19,'2018-07-28'),(126,19,'2018-08-04'),(128,11,'2018-05-26'),(129,21,'2018-06-02'),(133,11,'2018-06-02'),(246,17,'2018-06-09'),(138,17,'2018-06-30'),(142,28,'2018-06-09'),(143,8,'2018-07-07'),(144,8,'2018-07-14'),(145,8,'2018-07-21'),(146,8,'2018-07-28'),(147,8,'2018-08-04'),(148,8,'2018-08-11'),(152,6,'2018-06-13'),(154,6,'2018-06-20'),(157,10,'2018-07-14'),(253,5,'2018-06-27'),(189,11,'2018-06-09'),(166,11,'2018-06-16'),(254,27,'2018-07-14'),(168,11,'2018-06-30'),(169,11,'2018-07-07'),(170,11,'2018-07-14'),(171,11,'2018-07-21'),(172,11,'2018-07-28'),(173,11,'2018-08-04'),(174,11,'2018-08-11'),(176,8,'2018-08-18'),(177,10,'2018-07-07'),(178,6,'2018-07-18'),(180,6,'2018-08-01'),(181,6,'2018-08-15'),(239,7,'2018-08-22'),(183,4,'2018-06-09'),(184,4,'2018-06-16'),(185,9,'2018-06-09'),(186,15,'2018-06-09'),(187,14,'2018-06-09'),(188,24,'2018-06-09'),(248,2,'2018-06-20'),(193,12,'2018-06-23'),(194,14,'2018-06-30'),(197,16,'2018-06-09'),(198,18,'2018-07-04'),(199,18,'2018-07-07'),(200,18,'2018-07-11'),(201,18,'2018-07-14'),(202,18,'2018-07-18'),(203,18,'2018-07-21'),(204,18,'2018-09-05'),(205,18,'2018-09-08'),(206,18,'2018-09-12'),(207,18,'2018-09-15'),(208,18,'2018-09-19'),(209,18,'2018-09-22'),(210,18,'2018-09-26'),(211,18,'2018-09-29'),(212,18,'2018-10-03'),(213,18,'2018-10-06'),(214,18,'2018-10-10'),(215,18,'2018-10-13'),(216,18,'2018-10-17'),(217,9,'2018-08-18'),(329,24,'2018-07-21'),(315,23,'2018-08-08'),(221,7,'2018-08-11'),(233,27,'2018-06-16'),(240,10,'2018-07-04'),(224,14,'2018-07-07'),(225,14,'2018-09-29'),(226,26,'2018-07-21'),(227,26,'2018-07-28'),(249,25,'2018-07-21'),(250,25,'2018-07-28'),(231,24,'2018-10-20'),(235,15,'2018-06-16'),(236,15,'2018-06-23'),(237,6,'2018-06-30'),(238,6,'2018-06-27'),(241,10,'2018-07-11'),(242,10,'2018-07-18'),(244,20,'2018-06-23'),(251,9,'2018-06-16'),(247,17,'2018-06-06'),(252,9,'2018-06-23'),(255,27,'2018-07-21'),(256,26,'2018-06-09'),(261,3,'2018-06-23'),(258,11,'2018-06-23'),(259,7,'2018-06-23'),(262,3,'2018-07-11'),(330,24,'2018-12-29'),(264,3,'2018-07-07'),(265,3,'2018-07-14'),(266,15,'2018-09-15'),(267,15,'2018-09-22'),(268,15,'2018-09-29'),(269,15,'2018-10-06'),(270,15,'2018-10-13'),(271,11,'2018-08-18'),(272,11,'2018-08-25'),(273,11,'2018-09-01'),(274,11,'2018-09-08'),(279,7,'2018-06-30'),(285,7,'2018-07-04'),(277,23,'2018-06-30'),(331,3,'2018-09-29'),(281,5,'2018-08-25'),(319,5,'2018-08-08'),(324,5,'2018-09-01'),(284,5,'2018-08-11'),(286,7,'2018-07-07'),(287,7,'2018-07-14'),(288,7,'2018-07-21'),(289,7,'2018-07-28'),(290,7,'2018-08-04'),(291,7,'2018-08-08'),(292,7,'2018-08-15'),(293,7,'2018-08-18'),(294,7,'2018-08-25'),(295,7,'2018-08-29'),(296,7,'2018-09-01'),(297,7,'2018-09-05'),(298,7,'2018-09-08'),(299,7,'2018-09-12'),(300,7,'2018-09-15'),(301,7,'2018-09-19'),(302,7,'2018-09-22'),(303,7,'2018-09-26'),(304,7,'2018-09-29'),(305,7,'2018-10-03'),(306,23,'2018-07-07'),(307,23,'2018-07-18'),(308,23,'2018-07-25'),(309,23,'2018-07-14'),(310,23,'2018-07-21'),(312,9,'2018-11-03'),(313,23,'2018-08-01'),(314,23,'2018-07-28'),(316,23,'2018-08-04'),(397,5,'2018-08-04'),(320,5,'2018-08-15'),(321,5,'2018-08-22'),(323,5,'2018-08-29'),(327,9,'2018-07-14'),(328,9,'2018-07-07'),(332,3,'2018-10-03'),(383,12,'2018-08-08'),(382,21,'2018-10-13'),(381,21,'2018-10-06'),(380,21,'2018-09-29'),(400,21,'2018-08-25'),(378,9,'2019-01-05'),(377,9,'2018-12-29'),(374,28,'2018-10-20'),(376,9,'2018-09-29'),(375,28,'2018-10-27'),(373,28,'2018-10-13'),(372,28,'2018-10-06'),(371,28,'2018-09-29'),(370,28,'2018-09-22'),(369,28,'2018-09-15'),(368,28,'2018-09-08'),(367,28,'2018-09-01'),(366,28,'2018-08-25'),(365,28,'2018-08-18'),(364,28,'2018-08-11'),(363,28,'2018-08-04'),(362,28,'2018-07-28'),(359,28,'2018-12-15'),(384,12,'2018-08-11'),(361,28,'2018-07-21'),(360,28,'2018-07-14'),(385,12,'2018-08-15'),(386,12,'2018-08-18'),(387,12,'2018-08-22'),(388,6,'2018-08-29'),(389,6,'2018-09-12'),(390,6,'2018-09-26'),(391,17,'2018-08-01'),(394,10,'2018-08-15'),(395,10,'2018-08-25'),(396,10,'2018-09-19'),(398,2,'2018-12-01'),(399,2,'2018-11-28'),(402,27,'2018-08-11'),(403,18,'2018-08-11'),(404,13,'2018-08-11'),(405,25,'2018-08-11'),(408,19,'2018-08-11'),(409,19,'2018-08-18'),(410,19,'2018-08-25'),(411,19,'2018-09-01'),(412,19,'2018-09-08'),(413,19,'2018-09-15'),(414,19,'2018-09-22'),(415,19,'2018-09-29'),(416,19,'2018-10-06'),(417,19,'2018-10-13'),(418,19,'2018-10-20'),(419,19,'2018-10-27'),(420,19,'2018-11-03'),(421,19,'2018-11-10'),(422,19,'2018-11-17'),(423,19,'2018-11-24'),(424,19,'2018-12-01'),(425,19,'2018-12-08'),(426,16,'2018-08-18'),(427,3,'2018-10-10'),(428,23,'2018-10-10'),(429,29,'2018-10-06'),(507,29,'2019-02-23'),(506,29,'2019-02-16'),(505,29,'2019-02-02'),(504,29,'2019-02-09'),(503,29,'2019-01-26'),(502,29,'2019-01-19'),(501,29,'2019-01-12'),(500,29,'2019-01-05'),(499,29,'2018-12-29'),(498,29,'2018-12-22'),(497,29,'2018-12-15'),(496,29,'2018-12-08'),(494,29,'2018-11-24'),(493,29,'2018-11-17'),(495,29,'2018-12-01'),(492,29,'2018-11-10'),(491,29,'2018-11-03'),(490,29,'2018-10-27'),(489,29,'2018-10-20'),(488,29,'2018-10-13'),(450,29,'2019-03-02'),(451,11,'2018-10-06'),(452,11,'2018-10-13'),(453,11,'2018-10-20'),(454,11,'2018-10-27'),(455,11,'2018-11-03'),(456,11,'2018-11-10'),(457,11,'2018-11-17'),(458,11,'2018-11-24'),(459,11,'2018-12-01'),(460,11,'2018-12-08'),(461,11,'2018-12-15'),(462,11,'2018-12-22'),(463,11,'2018-12-29'),(464,25,'2018-10-13'),(465,14,'2018-10-20'),(466,14,'2018-12-29'),(467,27,'2018-10-13'),(468,24,'2018-10-13'),(470,6,'2018-10-10'),(471,6,'2018-10-17'),(472,6,'2018-11-24'),(473,6,'2018-10-31'),(474,6,'2018-11-07'),(475,6,'2018-11-14'),(476,6,'2018-11-21'),(477,6,'2018-12-12'),(478,6,'2018-12-05'),(479,2,'2018-11-17'),(480,2,'2018-11-21'),(481,2,'2018-11-24'),(482,2,'2018-12-05'),(483,2,'2018-12-08'),(484,2,'2018-11-10'),(485,23,'2018-10-24'),(486,23,'2018-10-27'),(487,23,'2018-10-20'),(508,29,'2019-03-16'),(509,29,'2019-03-09'),(510,29,'2019-03-23'),(511,29,'2019-03-30'),(512,29,'2019-04-06'),(513,3,'2018-12-26'),(514,16,'2018-10-27'),(515,16,'2018-11-03'),(516,16,'2018-11-10'),(517,16,'2018-10-20'),(518,7,'2018-10-13'),(519,12,'2018-10-24');
+/*!40000 ALTER TABLE `playernotavailable` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `Players`
+-- Table structure for table `players`
 --
 
-CREATE TABLE `Players` (
+DROP TABLE IF EXISTS `players`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `players` (
   `ID` int(5) NOT NULL AUTO_INCREMENT,
   `MemberNo` int(5) NOT NULL,
   `Given` varchar(50) NOT NULL,
@@ -522,36 +112,26 @@ CREATE TABLE `Players` (
   `username` varchar(50) DEFAULT NULL,
   `Wednesday` tinyint(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Players`
+-- Dumping data for table `players`
 --
 
-INSERT INTO `Players` VALUES(2, 1411, 'Brian', 'Ackland', 'Brian Ackland', 'brian.ackland@me.com', 1, 'BAC', 1);
-INSERT INTO `Players` VALUES(3, 9516, 'Robert', 'Ackland', 'Bob Ackland', 'bob1_ackland@hotmail.com', 1, 'RAC', 1);
-INSERT INTO `Players` VALUES(4, 35, 'Roger', 'Ballantine', 'Roger Ballantine', 'roger@mastaustralia.com.au', 1, 'RBA', 0);
-INSERT INTO `Players` VALUES(5, 71, 'Edmund', 'Bienias', 'Eddie (the Spot) Bienias', 'eddyandrobyn@bigpond.com', 1, 'EBI', 1);
-INSERT INTO `Players` VALUES(6, 9469, 'Darryl', 'Bretherton', 'Darryl Bretherton', 'dbreth@hotmail.com', 1, 'DBR', 1);
-INSERT INTO `Players` VALUES(7, 161, 'Michael', 'Corcoran', 'Michael Corcoran', 'michael.jan@bigpond.com', 1, 'MCO', 1);
-INSERT INTO `Players` VALUES(8, 186, 'Tim', 'Daly', 'Tim Daly', 'timdaly44@bigpond.com', 1, 'TDA', 0);
-INSERT INTO `Players` VALUES(9, 297, 'John', 'Fyffe', 'John Fyffe', 'jfyffe@bigpond.net.au', 1, 'JFY', 0);
-INSERT INTO `Players` VALUES(10, 312, 'Steve', 'Gilbee', 'Steve Gilbee', 'steve.gilbee@gmail.com', 1, 'SGI', 1);
-INSERT INTO `Players` VALUES(11, 2714, 'Brad', 'Jamieson', 'Brad Jamieson', 'bradja@harrythehirer.com.au', 1, 'BJA', 0);
-INSERT INTO `Players` VALUES(12, 506, 'Kevin', 'Krahe', 'Kevin  (OldCodger) Krahe', 'kkrahe57@gmail.com', 1, 'KKR', 1);
-INSERT INTO `Players` VALUES(13, 2172, 'Italo', 'Marcantonio', 'Italo Marcantonio', 'melnitalo@iprimus.com.au', 1, 'IMA', 0);
-INSERT INTO `Players` VALUES(14, 9458, 'Terry', 'McGann', 'Terry McGann', 'teemacgee@gmail.com', 1, 'TMC', 0);
-INSERT INTO `Players` VALUES(15, 2374, 'Robert', 'Meates', 'Robert Meates', 'robbiem4@bigpond.com', 1, 'RME', 0);
-INSERT INTO `Players` VALUES(16, 1685, 'Ken', 'Milne', 'Ken Milne', 'ken-maz@bigpond.net.au', 1, 'KMI', 0);
-INSERT INTO `Players` VALUES(17, 2421, 'Ian', 'Nicolle', 'Ian Nicolle', 'inicolle@icloud.com', 1, 'INI', 1);
-INSERT INTO `Players` VALUES(18, 686, 'Kevin', 'OHehir', 'Kevin OHehir', 'kohr@iprimus.com.au', 1, 'KOH', 1);
-INSERT INTO `Players` VALUES(19, 707, 'Dave', 'Pearson', 'Dave Pearson', 'lynne.pearson@hotmail.com', 1, 'DPE', 0);
-INSERT INTO `Players` VALUES(20, 1657, 'Stephen', 'Peasnell', 'Steve Peasnell', 'sspeasnell@optusnet.com.au', 1, 'SPE', 0);
-INSERT INTO `Players` VALUES(21, 747, 'David', 'Raymond', 'David (Bloke) Raymond', 'draymo8351@hotmail.com', 1, 'DRA', 0);
-INSERT INTO `Players` VALUES(23, 2266, 'Kevin', 'Storan', 'Kevin Storan', 'kstoran@bigpond.net.au', 1, 'KST', 1);
-INSERT INTO `Players` VALUES(24, 9496, 'Dean', 'Stuart', 'Dean Stuart', 'dean@needtools.com.au', 1, 'DST', 0);
-INSERT INTO `Players` VALUES(25, 1475, 'Don', 'Todorov', 'Don Todorov', 'dontodorov@live.com.au', 1, 'DTO', 0);
-INSERT INTO `Players` VALUES(26, 2156, 'Neil', 'Walker', 'Neil Walker (The Phantom)', 'neilwalker15@telstra.com', 1, 'NWA', 0);
-INSERT INTO `Players` VALUES(27, 973, 'Brett', 'Williams', 'Brett Williams', 'brett.williams@live.com.au', 1, 'BWI', 0);
-INSERT INTO `Players` VALUES(28, 2131, 'Trevor', 'Williams', 'Trevor Williams', 'trevor@tjshaircompany.com.au', 1, 'TWI', 0);
-INSERT INTO `Players` VALUES(29, 1158, 'Alex', 'Constantinos', 'Alex Constantinos', 'alex_constantinos@hotmail.com', 0, 'ACO', 0);
+LOCK TABLES `players` WRITE;
+/*!40000 ALTER TABLE `players` DISABLE KEYS */;
+INSERT INTO `players` VALUES (2,1411,'Brian','Ackland','Brian Ackland','brian.ackland@me.com',1,'BAC',1),(3,9516,'Robert','Ackland','Bob Ackland','bob1_ackland@hotmail.com',1,'RAC',1),(4,35,'Roger','Ballantine','Roger Ballantine','roger@mastaustralia.com.au',1,'RBA',0),(5,71,'Edmund','Bienias','Eddie (the Spot) Bienias','eddyandrobyn@bigpond.com',1,'EBI',1),(6,9469,'Darryl','Bretherton','Darryl Bretherton','dbreth@hotmail.com',1,'DBR',1),(7,161,'Michael','Corcoran','Michael Corcoran','michael.jan@bigpond.com',1,'MCO',1),(8,186,'Tim','Daly','Tim Daly','timdaly44@bigpond.com',1,'TDA',0),(9,297,'John','Fyffe','John Fyffe','jfyffe@bigpond.net.au',1,'JFY',0),(10,312,'Steve','Gilbee','Steve Gilbee','steve.gilbee@gmail.com',1,'SGI',1),(11,2714,'Brad','Jamieson','Brad Jamieson','bradja@harrythehirer.com.au',1,'BJA',0),(12,506,'Kevin','Krahe','Kevin  (Oldrummer) Krahe','kkrahe57@gmail.com',1,'KKR',1),(13,2172,'Italo','Marcantonio','Italo Marcantonio','melnitalo@iprimus.com.au',1,'IMA',0),(14,9458,'Terry','McGann','Terry McGann','teemacgee@gmail.com',1,'TMC',0),(15,2374,'Robert','Meates','Robert Meates','robbiem4@bigpond.com',1,'RME',0),(16,1685,'Ken','Milne','Ken Milne','ken-maz@bigpond.net.au',1,'KMI',0),(17,2421,'Ian','Nicolle','Ian Nicolle','inicolle@icloud.com',1,'INI',1),(18,686,'Kevin','OHehir','Kevin OHehir','kohr@iprimus.com.au',1,'KOH',1),(19,707,'Dave','Pearson','Dave Pearson','lynne.pearson@hotmail.com',1,'DPE',0),(20,1657,'Stephen','Peasnell','Steve Peasnell','sspeasnell@optusnet.com.au',1,'SPE',0),(21,747,'David','Raymond','David (Bloke) Raymond','draymo8351@hotmail.com',1,'DRA',0),(23,2266,'Kevin','Storan','Kevin Storan','kstoran@bigpond.net.au',1,'KST',1),(24,9496,'Dean','Stuart','Dean Stuart','dstuart9@outlook.com',1,'DST',1),(25,1475,'Don','Todorov','Don Todorov','dontodorov@live.com.au',1,'DTO',0),(26,2156,'Neil','Walker','Neil Walker (The Phantom)','neilwalker15@telstra.com',1,'NWA',0),(27,973,'Brett','Williams','Brett Williams','brett.williams@live.com.au',1,'BWI',0),(28,2131,'Trevor','Williams','Trevor Williams','trevor@tjshaircompany.com.au',1,'TWI',0),(29,1158,'Alex','Constantinos','Alex Constantinos','alex_constantinos@hotmail.com',1,'ACO',0);
+/*!40000 ALTER TABLE `players` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-10-08  3:21:56
