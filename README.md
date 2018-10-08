@@ -16,4 +16,13 @@ The site consists of the following components
  - Footer.php : Common Include for HTML Page Footer
  - MemberLookup.php : AJAX Call from PlayerDates.php to Lookup player by Membership Number 
  - Unavailable.php : Toggle playing date on/off.  AJAX Call from PlayerDates.php
+ - DeleteLock.php : Hidden Page to allow deleting of booking lock for re-generation of groups
  - GolfBooking.sql : Backup of Database Tables
+
+Image Files are as Follows
+ - android-touch-icon.png
+ - apple-touch-icon-1.png
+ - apple-touch-icon-2.png
+ - calendar.png          ( For Email )
+ - window-icon.png
+ 
