@@ -1,7 +1,7 @@
 <?php
 ?>
 <nav class="navbar navbar-dark bg-success">
-       <a class="navbar-brand" href="#">
+       <a class="navbar-brand" href="index.php">
        <i class="fas fa-golf-ball"></i>&nbsp;&nbsp;
        HGC Table Tappers </a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">

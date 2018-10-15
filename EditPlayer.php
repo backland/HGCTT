@@ -73,7 +73,7 @@ require "Navigation.php";
 </div>
 <script type-text/javascript>
 function CancelForm() {
-    location.href="index.php";  
+    location.href="Players.php";  
 }
 function SaveForm() {
    document.Player.submit();  
