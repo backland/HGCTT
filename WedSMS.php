@@ -21,7 +21,6 @@ if ($result) {
     $mobileNo=$row[2];
     echo "\n$date - Booking Player $Player ";
     if (!empty($mobileNo)) {
-$mobileNo="+61412515818";
       $messages = $client->getMessages();
       $bodyValue = '{
              "messages":[
