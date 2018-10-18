@@ -12,7 +12,8 @@ require "Navigation.php"; ?>
              "<th scope=col>Name</th>".
              "<th scope=col class='text-center'>Wed</th>".
              "<th scope=col class='text-center'>Sat</th>".
-             "<th scope=col>Email</th></tr>";
+             "<th scope=col>Email</th>".
+             "<th scope=col>Mobile</th></tr>";
 if ($results) {
   while ($row = mysqli_fetch_array($results)) {
     $Sat=($row[6]=='1')? "<i class=\"fas fa-golf-club text-success\"></i>":"";
@@ -27,7 +28,8 @@ if ($results) {
              $row[3].", ".$row[2]."<a></td>".
              "<td class='text-center'>$Wed</td>".
              "<td class='text-center'>$Sat</td>".
-             "<td>".$row[5]."</td></tr>";
+             "<td>".$row[5]."</td>".
+             "<td>".$row[9]."</td></tr>";
   }
 }
 ?>

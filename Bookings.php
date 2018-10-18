@@ -100,10 +100,10 @@
       $SendToList .= $row[1]." <".filter_var($row[0],FILTER_SANITIZE_EMAIL).">, ";
       $CopyToList .= "Cc: \"".$row[1]."\"<".filter_var($row[0],FILTER_SANITIZE_EMAIL).">".PHP_EOL;
       $CopyToRows .= "<tr><td style='white-space:nowrap;padding:2px'>".PHP_EOL.
-                         "<a href=http://hgctt.com/PlayerDates.php?PlayerId=".$row[2].">".PHP_EOL.
-                         "<img src=http://hgctt.com/calendar.png></a></td>".PHP_EOL.
+                         "<a href=https://hgctt.com/PlayerDates.php?PlayerId=".$row[2].">".PHP_EOL.
+                         "<img src=https://hgctt.com/calendar.png></a></td>".PHP_EOL.
                      "<td style='white-space:nowrap'>".PHP_EOL.
-                     "<a href=http://hgctt.com/PlayerDates.php?PlayerId=".$row[2].">".PHP_EOL.
+                     "<a href=https://hgctt.com/PlayerDates.php?PlayerId=".$row[2].">".PHP_EOL.
                      htmlspecialchars($row[1])."</a></td>".PHP_EOL.
                      "<td style='white-space:nowrap'>".filter_var($row[0],FILTER_SANITIZE_EMAIL)."</td></tr>".PHP_EOL;
     }
