@@ -1,14 +1,12 @@
 #!/opt/bitnami/php/bin/php
 <?php
+require "SMSConfig.php";
 require "Database.php";
 require_once "vendor/autoload.php";
 use MessageMediaMessagesLib\MessageMediaMessagesClient;
 use MessageMediaMessagesLib\APIHelper;
 $date = new DateTime();
 $date = $date->format("y:m:d h:i:s");
-$authUserName = "RrTU0Ovyk84fAb98QybB";
-$authPassword = "sk1XMEp2sXjameQ43YwRfIZxBk6p5P";
-$useHmacAuthentication = true; // Change to true if you are using HMAC keys
 $client = new MessageMediaMessagesLib\MessageMediaMessagesClient($authUserName, $authPassword, $useHmacAuthentication);
 $Today=date("D d M Y");
 $TimeAdjust="Saturday +1 weeks";
