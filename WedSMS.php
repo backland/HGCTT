@@ -2,12 +2,8 @@
 <?php
 require "SMSConfig.php";
 require "Database.php";
-require_once "vendor/autoload.php";
-use MessageMediaMessagesLib\MessageMediaMessagesClient;
-use MessageMediaMessagesLib\APIHelper;
 $date = new DateTime();
 $date = $date->format("y:m:d h:i:s");
-$client = new MessageMediaMessagesLib\MessageMediaMessagesClient($authUserName, $authPassword, $useHmacAuthentication);
 $Today=date("D d M Y");
 $TimeAdjust="Wednesday +1 weeks";
 $BookingDate=date("Y-m-d",strtotime($TimeAdjust));
@@ -21,18 +17,24 @@ if ($result) {
     $mobileNo=$row[2];
     echo "\n$date - Booking Player $Player ";
     if (!empty($mobileNo)) {
-      $messages = $client->getMessages();
-      $bodyValue = '{
-             "messages":[
-                {
-                   "content":"Golf Bookings in 15 Minutes Check : https://hgctt.com/",
-                   "destination_number":"'.$mobileNo.'"
-                }
-             ]
-           }';
-      $body = MessageMediaMessagesLib\APIHelper::deserialize($bodyValue);
-      $msgResult = $messages->createSendMessages($body);
-      echo " SMS on $mobileNo";
+      $headerValue = array(
+        "Content-type: application/json",
+        "Accept: application/json",
+      );
+      $bodyValue = '{ "messages":[ {
+                      "content":"HGC Golf Bookings in 15 Minutes Check Your Group at \n\n https://hgctt.com/wed.php \n\n(DO NOT REPLY)",
+                      "destination_number":"'.$mobileNo.'"
+                    } ] }';
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,"https://api.messagemedia.com/v1/messages");
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+      curl_setopt($ch, CURLOPT_HTTPAUTH,CURLAUTH_BASIC);
+      curl_setopt($ch, CURLOPT_USERPWD,$basicAuthUserPwd);
+      curl_setopt($ch, CURLOPT_POST,true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS,$bodyValue);
+      curl_setopt($ch, CURLOPT_HTTPHEADER,$headerValue);
+      $response = curl_exec($ch);
+      echo " SMS sent on $mobileNo";
     }
   }
 }
