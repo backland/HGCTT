@@ -24,6 +24,9 @@
           <li class="nav-item">
             <a class="nav-link" href="Bookings.php?Day=Sat">Generate Saturday Groups</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="LogView.php">SMS Notification Log</a>
+          </li>
         </ul>
       </div>
     </nav>
