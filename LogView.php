@@ -3,7 +3,7 @@
   require "Database.php";
   require "Header.php";
   require "Navigation.php";
-  echo "<div class='card d-none d-sm-block'>
+  echo "<div class='card'>
         <div class='card-body'>SMS Notifcation Log<ul class='list-group'>";
   $filename = 'notification.log';
   $file = fopen("notification.log", "r") or exit("Unable to open file!");
