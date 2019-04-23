@@ -20,11 +20,12 @@ require "Navigation.php"; ?>
 <?php
     echo "<h5 style='padding:10px'>";
     if ($PlayerId=="0") {
-      echo "</h5><input placeholder='Enter Membership No' name=MemberNo id=MemberNo size=30>";
-      echo "<input type=button value='Show' onclick='GetPlayerId()'><br>";
+      echo "<form class='form-row'><div class='col-auto'><input placeholder='Member No' class='form-control' name=MemberNo id=MemberNo size=15></div>";
+      echo "<div class='col-auto'><button class='btn btn-primary mb-2' onclick='GetPlayerId()'>Show</button></div></form></h5>";
+    } else {
+      echo "$Player";
+      echo "<button type=button class='btn btn-danger float-right '  onclick='GoBack();'>Back</button></h5>";
     }
-    echo "$Player";
-    echo "<button type=button class='btn btn-danger float-right '  onclick='GoBack();'>Back</button></h5>";
     echo "<table class='table-striped table'><tr>".
              "<th scope=col style='width:20%;white-space:nowrap'>Date</th><th scope=col class='text-center'>Playing</th></tr>";
     for ($i=0; $i<26; $i++) {
