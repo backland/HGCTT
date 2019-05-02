@@ -21,47 +21,71 @@ require "Navigation.php"; ?>
     echo "<h5 style='padding:10px'>";
     if ($PlayerId=="0") {
       echo "<form class='form-row'><div class='col-auto'><input placeholder='Member No' class='form-control' name=MemberNo id=MemberNo size=15></div>";
-      echo "<div class='col-auto'><button class='btn btn-primary mb-2' onclick='GetPlayerId()'>Show</button></div></form></h5>";
+      echo "<div class='col-auto'><button type=button class='btn btn-primary mb-2' onclick='GetPlayerId()'>Show</button></div></form></h5>";
     } else {
       echo "$Player";
-      echo "<button type=button class='btn btn-danger float-right '  onclick='GoBack();'>Back</button></h5>";
+      echo "<button type=button class='btn btn-danger float-right '  onclick='GoBack();'>Players</button></h5>";
     }
     echo "<table class='table-striped table'><tr>".
              "<th scope=col style='width:20%;white-space:nowrap'>Date</th><th scope=col class='text-center'>Playing</th></tr>";
     for ($i=0; $i<26; $i++) {
       $WeekOff=$i-$Offset;
       if ($Wed==1) {
-        $TimeAdjust="Wednesday $WeekOff weeks";
+        $day = date('w');
+        if ($day > 3 ) {
+          $TimeAdjust="Last Wednesday $WeekOff weeks";
+        } else {
+          $TimeAdjust="Wednesday $WeekOff weeks";
+        }
         $WeekDay=date("D d M Y",strtotime($TimeAdjust));
         $Week=date("Ymd",strtotime($TimeAdjust));
-        $sql="SELECT 'checked' from PlayerNotAvailable where BookingDate='$Week' and PlayerId='$PlayerId'";
-        $Checked="";
-        $Available="";
-        $Available="<i class=\"fal fa-check fa-2x text-success\"></i>";
+        $Click="onclick=\"SetUnavailable(this,'$PlayerId','$Week');\"></i>";
+        $Locked="";
+        $sql="SELECT 'locked' from BookingLock where BookingDate='$Week'";
         if ($f = mysqli_query($link,$sql)) {
           if (mysqli_num_rows($f)>0) {
-            $Available="<i class=\"fal fa-times fa-2x text-danger\"></i>";
+            $Locked="<i class=\"fal fa-lock text-danger\"></i>";
+            $Click="onclick='alert(\"Booking Sheet Generated and Locked\");'></i>";  /* Locked so No CLick */
+          } 
+        }
+        $Checked="";
+        $sql="SELECT 'checked' from PlayerNotAvailable where BookingDate='$Week' and PlayerId='$PlayerId'";
+        $Available="";
+        $Available="<i class=\"fal fa-check fa-2x text-success\" ";
+        if ($f = mysqli_query($link,$sql)) {
+          if (mysqli_num_rows($f)>0) {
+            $Available="<i class=\"fal fa-times fa-2x text-danger\" ";
             $Checked="checked";
           }
-        echo "<tr><td style='width:20%;white-space:nowrap'>$WeekDay</td>".
-             "<td class='text-center' onclick=\"SetUnavailable(this,'$PlayerId','$Week');\">".$Available."</td></tr>";
+          echo "<tr><td style='width:20%;white-space:nowrap'>$Locked $WeekDay</td>".
+               "<td class='text-center'>$Available$Click</td></tr>";
         }
       }
       if ($Sat==1) {
         $TimeAdjust="Saturday $WeekOff weeks";
         $WeekDay=date("D d M Y",strtotime($TimeAdjust));
         $Week=date("Ymd",strtotime($TimeAdjust));
+        $Click="onclick=\"SetUnavailable(this,'$PlayerId','$Week');\"></i>";
+        $Locked="";
+        $sql="SELECT 'locked' from BookingLock where BookingDate='$Week'";
+        if ($f = mysqli_query($link,$sql)) {
+          if (mysqli_num_rows($f)>0) {
+            $Locked="<i class=\"fal fa-lock text-danger\"></i>";
+            $Click=" onclick='alert(\"Booking Sheet Generated and Locked\");'></i>";  /* Locked so No CLick */
+          } 
+        }
+        $Checked="";
         $sql="SELECT 'checked' from PlayerNotAvailable where BookingDate='$Week' and PlayerId='$PlayerId'";
         $Checked="";
         $Available="";
-        $Available="<i class=\"fal fa-check fa-2x text-success\"></i>";
+        $Available="<i class=\"fal fa-check fa-2x text-success\" ";
         if ($f = mysqli_query($link,$sql)) {
           if (mysqli_num_rows($f)>0) {
-            $Available="<i class=\"fal fa-times fa-2x text-danger\"></i>";
+            $Available="<i class=\"fal fa-times fa-2x text-danger\" ";
             $Checked="checked";
-        }
-        echo "<tr><td style='width:20%;white-space:nowrap'>$WeekDay</td>".
-             "<td class='text-center' onclick=\"SetUnavailable(this,'$PlayerId','$Week');\">".$Available."</td></tr>";
+          }
+          echo "<tr><td style='width:20%;white-space:nowrap'>$Locked $WeekDay</td>".
+               "<td class='text-center'>$Available$Click</td></tr>";
         }
       }
     }
@@ -80,14 +104,14 @@ function SetUnavailable(el,PlayerId,BookingDate) {
    $("#BookingDate").val(BookingDate);
    $("#PlayerId").val(PlayerId);
    $.post("Unavailable.php",$( "#PostData" ).serialize());
-   if (el.innerHTML=="<i class=\"fal fa-check fa-2x text-success\"></i>") {
-      el.innerHTML="<i class=\"fal fa-times fa-2x text-danger\"></i>";
+   if (el.className=="fal fa-check fa-2x text-success") {
+      el.className="fal fa-times fa-2x text-danger";
    } else {
-     el.innerHTML="<i class=\"fal fa-check fa-2x text-success\"></i>";
+     el.className="fal fa-check fa-2x text-success";
    }
 }
 function GoBack() {
-  history.back();
+  location.href="Players.php";
 }
 function GetPlayerId() {
    lookupURL="MemberLookup.php?MemberNo="+$("#MemberNo").val();
