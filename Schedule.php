@@ -80,15 +80,15 @@ if ($results) {
 <?php require "Footer.php"?>
 <script type=text/javascript>
 function SetUnavailable(el,PlayerId,BookingDate) {
-   $("#BookingDate").val(BookingDate);
-   $("#PlayerId").val(PlayerId);
-   $.post("Unavailable.php",$( "#PostData" ).serialize());
+//   $("#BookingDate").val(BookingDate);
+//   $("#PlayerId").val(PlayerId);
+//   $.post("Unavailable.php",$( "#PostData" ).serialize());
 //   if (el.innerHTML=="<i class=\"fal fa-check-square text-success\"></i>") {
-   if (el.innerHTML=="") {
-      el.innerHTML="<i class=\"fal fa-times fa-2x text-danger\"></i>";
-   } else {
+//   if (el.innerHTML=="") {
+//      el.innerHTML="<i class=\"fal fa-times fa-2x text-danger\"></i>";
+//   } else {
 //     el.innerHTML="<i class=\"fal fa-check-square text-success\"></i>";
-     el.innerHTML="";
-   }
+//     el.innerHTML="";
+//   }
 }
 </script>
