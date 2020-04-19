@@ -26,7 +26,7 @@ require "Header.php";
 require "Navigation.php";
 echo '<div class="alert alert-success" role="alert">';
 echo "Booking Date : $Day $NiceBookingDate </div>";
-
+$groupsize=4;
 $sql="DELETE FROM Bookings Where BookingDate='$BookingDate';";
 $result = mysqli_query($link,$sql);
 
@@ -46,8 +46,8 @@ if ($results) {
     $players[] = $row[0];
   }
 }
-$groups=ceil(count($players)/4);
-$extras=count($players)%4;
+$groups=ceil(count($players)/$groupsize);
+$extras=count($players)%$groupsize;
 for ($g=0; $g<$groups; $g++) {
   $bookingId[]=$players[$g];
 }
@@ -68,19 +68,21 @@ if ($result) {
 
 $groupId=array();
 if ($extras>0) {
-  $dummies=4-$extras;
+  $dummies=$groupsize-$extras;
 }
 $p=0;
 echo "<table class='table-striped table table-sm'><tr><th scope=col>#</th>";
 echo "<th scope=col>Booking</td>";
-echo "<th class='text-center' scope=col>2</td>";
-echo "<th class='text-center' scope=col>3</td>";
-echo "<th class='text-center' scope=col>4</td></tr>";
+for ($i=2;$i=<$groupsize;$i++) {
+  echo "<th class='text-center' scope=col>$i</td>";
+
+}
+echo "</tr>";
 for ($g=0; $g<$groups; $g++) {
   $GroupNumber=$g+1;
   echo "<tr>";
   echo "<td>$GroupNumber</td>";
-  $pg=4;
+  $pg=$groupsize;
   if ($dummies>0) {
     $dummies=$dummies-1;
     $pg=$pg-1;
@@ -97,7 +99,7 @@ for ($g=0; $g<$groups; $g++) {
     $p++;
     $insert.=",'".$players[$p]."'";
   }
-  for ($i=$pg;$i<4;$i++) {
+  for ($i=$pg;$i<$groupsize;$i++) {
     $insert.=",'0'";
   }
   $insert.=");";
@@ -114,7 +116,7 @@ for ($g=0; $g<$groups; $g++) {
       echo "<td>".$row[1]."(".$row[2].")</td>";
       $cols=$cols+1;
     }
-    for ($i=$cols;$i<4;$i++) {
+    for ($i=$cols;$i<$groupsize;$i++) {
       echo "<td>&nbsp;</td>";
     }
     echo "</tr>";

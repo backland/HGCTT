@@ -7,9 +7,8 @@ $mail_headers .= "Content-type:text/html;charset=UTF-8".PHP_EOL;
 $mail_headers .= "From: ".($from).PHP_EOL;
 $mail_headers .= "Reply-To: ".($replyto).PHP_EOL;
 $mail_headers .= "Return-Path: ".($from).PHP_EOL;
-$mail_headers .= "X-Priority: 3".PHP_EOL;
+$mail_headers .= "X-Priority: 1".PHP_EOL;
 $mail_headers .= "X-Mailer: PHP".phpversion().PHP_EOL;
-$mail_headers .= "CC:backland@csc.com".PHP_EOL;
 $mail_message = "<html><head>
 <title>HTML Title</title></head>
 <body>

@@ -3,11 +3,26 @@
   require "Database.php";
   function yesNo($n){ return $n == 1 ? 'Yes' : ' '; }
   $LoadError="";
-  $Password=(isset($_REQUEST["Password"])) ? $_REQUEST["Password"] : "";
+  $sql="select KeyValue from config where KeyName='GroupSize'";
+  $results = mysqli_query($link,$sql);
+  $KeyValue = mysqli_fetch_assoc(mysqli_query($link, "select KeyValue from config where KeyName='GroupSize'"));
+  $DefaultGroupSize = $KeyValue['KeyValue'];
+  $Password=(isset($_REQUEST["Password"]))   ? $_REQUEST["Password"] : "";
   $Narrative=(isset($_REQUEST["Narrative"])) ? $_REQUEST["Narrative"] : "";
-  $Sendmail=(isset($_REQUEST["Sendmail"])) ? $_REQUEST["Sendmail"] : "0";
-  $Generate=(isset($_REQUEST["Generate"])) ? $_REQUEST["Generate"] : "0";
+  $Sendmail=(isset($_REQUEST["Sendmail"]))   ? $_REQUEST["Sendmail"] : "0";
+  $Generate=(isset($_REQUEST["Generate"]))   ? $_REQUEST["Generate"] : "0";
+  $GroupSize=(isset($_REQUEST["GroupSize"])) ? $_REQUEST["GroupSize"] : $DefaultGroupSize;
+  $sql="update config set KeyValue='$GroupSize' where KeyName='GroupSize'";
+if (mysqli_query($link, $sql)) {
+    $SQLError= "";
+} else {
+    $SQLError= $sql."<br>Error updating record: " . mysqli_error($link)."<br>";
+}
+
   $Offset=(isset($_REQUEST["Offset"])) ? $_REQUEST["Offset"] : "1";
+  $ColumnWidth="48%";
+  if ($GroupSize>2) $ColumnWidth="32%";
+  if ($GroupSize>3) $ColumnWidth="24%";
   $Day=(isset($_REQUEST["Day"])) ? $_REQUEST["Day"] : "Sat";
   $showCalculation="";
   $DayShort=$Day;
@@ -73,6 +88,16 @@
   echo "<div class=\"alert alert-success\" role=\"alert\">";
   echo "<h3>Generate $Day Groups</h3>";
   echo "Book On : ".$BookOnDate."<br>";
+  echo "Group Size :  ";
+  echo "<select name=GroupSize onchange='this.form.submit();'>";
+  if ($GroupSize==2) { echo "<option selected value=2>2</option>";
+              } else { echo "<option value=2>2</option>"; }
+  if ($GroupSize==3) { echo "<option selected value=3>3</option>";
+              } else { echo "<option value=3>3</option>"; }
+  if ($GroupSize==4) { echo "<option selected value=4>4</option>";
+              } else { echo "<option value=4>4</option>"; }
+  echo "</select><br>";
+  echo $SQLError;
   echo "Booking Date :  ";
   echo "<select name=Offset onchange='this.form.submit();'>";
   for ($i=-5;$i<7;$i++) {
@@ -100,10 +125,10 @@
       $SendToList .= $row[1]." <".filter_var($row[0],FILTER_SANITIZE_EMAIL).">, ";
       $CopyToList .= "Cc: \"".$row[1]."\"<".filter_var($row[0],FILTER_SANITIZE_EMAIL).">".PHP_EOL;
       $CopyToRows .= "<tr><td style='white-space:nowrap;padding:2px'>".PHP_EOL.
-                         "<a href=https://hgctt.com/PlayerDates.php?PlayerId=".$row[2].">".PHP_EOL.
+                         "<a href=https://hgctt.com/PlayerDates.php>".PHP_EOL. /*  ?PlayerId=".$row[2].">".PHP_EOL. */
                          "<img src=https://hgctt.com/calendar.png></a></td>".PHP_EOL.
                      "<td style='white-space:nowrap'>".PHP_EOL.
-                     "<a href=https://hgctt.com/PlayerDates.php?PlayerId=".$row[2].">".PHP_EOL.
+                     "<a href=https://hgctt.com/PlayerDates.php>".PHP_EOL.   /* ?PlayerId=".$row[2].">".PHP_EOL. */
                      htmlspecialchars($row[1])."</a></td>".PHP_EOL.
                      "<td style='white-space:nowrap'>".filter_var($row[0],FILTER_SANITIZE_EMAIL)."</td></tr>".PHP_EOL;
     }
@@ -118,8 +143,8 @@
     $results = mysqli_query($link,$sql);
     if ($results) {
       $row = mysqli_fetch_array($results);
-      $groups=ceil($row[0]/4);
-      $extras=$row[0]%4;
+      $groups=ceil($row[0]/$GroupSize);
+      $extras=$row[0]%$GroupSize;
     }
     $sql="select ID, PlayerName, TotalBooked, TotalPlayed, NotPlayingThisWeek,BookedLastWeek, TotalBooked/TotalPlayed + NotPlayingThisWeek + BookedLastWeek  ratio from 
           (select p.id ID, p.name PlayerName,
@@ -184,11 +209,11 @@
       }
     }
     $groupId=array();
-    if ($extras>0) { $dummies=4-$extras; }
+    if ($extras>0) { $dummies=$GroupSize-$extras; }
     $p=0;
     for ($g=0; $g<$groups; $g++) {
       $GroupNumber=$g+1;
-      $pg=4;
+      $pg=$GroupSize;
       if ($dummies>0) {
         $dummies=$dummies-1;
         $pg=$pg-1;
@@ -218,10 +243,11 @@
         <div class='card-body'>
         <table class='table-striped table table-sm'>
         <tr><th scope=col>#</th>
-            <th scope=col>Booking</td>
-            <th scope=col>Player 2 </td>
-            <th scope=col>Player 3</td>
-            <th scope=col>Player 4</td></tr>";
+            <th scope=col>Booking</td>";
+  for ($g=2; $g<$GroupSize+1; $g++) {
+    $tableLarge.="<th scope=col>Player $g</td>";
+  }
+  $tableLarge.="</tr>";
 
   $tableSmall="<div class='card d-block d-sm-none'>
         <div class='card-body'>
@@ -230,10 +256,10 @@
             <th scope=col>Group</td></tr>";
   $sql="select a.GroupNo,
         (select concat(given,' ',surname) from Players where id=PlayerID1) Player1,
-        (select concat(given,' ',surname) from Players where id=PlayerID2) Player2,
-        (select concat(given,' ',surname) from Players where id=PlayerID3) Player3,
-        (select concat(given,' ',surname) from Players where id=PlayerID4) Player4
-        from Bookings a
+        (select concat(given,' ',surname) from Players where id=PlayerID2) Player2";
+  if ($GroupSize>2){ $sql.=",(select concat(given,' ',surname) from Players where id=PlayerID3) Player3";}
+  if ($GroupSize>3){ $sql.=",(select concat(given,' ',surname) from Players where id=PlayerID4) Player4";}
+  $sql.=" from Bookings a
         where a.BookingDate = '$BookingDate'
         ORDER BY a.GroupNo";
   $result = mysqli_query($link,$sql);
@@ -246,24 +272,29 @@
       $p1="&nbsp;"; $p2="&nbsp;"; $p3="&nbsp;"; $p4="&nbsp;";
       if (!empty($row[1])) $p1="<b>".htmlspecialchars($row[1])."</b>";
       if (!empty($row[2])) $p2=htmlspecialchars($row[2]);
-      if (!empty($row[3])) $p3=htmlspecialchars($row[3]);
-      if (!empty($row[4])) $p4=htmlspecialchars($row[4]);
+      if ($GroupSize>2) {if (!empty($row[3])) $p3=htmlspecialchars($row[3]);}
+      if ($GroupSize>3) {if (!empty($row[4])) $p4=htmlspecialchars($row[4]);}
       $tableLarge.="<tr><td>".$row[0]."</td>
                         <td class='text-nowrap'>".$p1."</td>
-                        <td class='text-nowrap'>".$p2."</td>
-                        <td class='text-nowrap'>".$p3."</td>
-                        <td class='text-nowrap'>".$p4."</td><tr>";
+                        <td class='text-nowrap'>".$p2."</td>";
+      if ($GroupSize>2){ $tableLarge.="<td class='text-nowrap'>".$p3."</td>";}
+      if ($GroupSize>3){ $tableLarge.="<td class='text-nowrap'>".$p4."</td>";}
+      $tableLarge.="<tr>";
       $tableSmall.="<tr><td>".$row[0]."</td>
-                        <td>".$p1."<br>".$p2."<br>".$p3."<br>".$p4."</td></tr>";
+                        <td>".$p1."<br>".$p2;
+      if ($GroupSize>2){ $tableSmall.="<br>".$p3;}
+      if ($GroupSize>3){ $tableSmall.="<br>".$p4;}
+      $tableSmall.="</td><tr>";
       if (!empty($row[1])) $p1=htmlspecialchars($row[1]);
       if (!empty($row[2])) $p2=htmlspecialchars($row[2]);
-      if (!empty($row[3])) $p3=htmlspecialchars($row[3]);
-      if (!empty($row[4])) $p4=htmlspecialchars($row[4]);
+      if ($GroupSize>2){ if (!empty($row[3])) $p3=htmlspecialchars($row[3]);}
+      if ($GroupSize>3){ if (!empty($row[4])) $p4=htmlspecialchars($row[4]);}
       $MailTable.="<tr><td>".$row[0]."</td>".PHP_EOL.
-                  "<td style='font-weight:bold;width:24%;white-space:nowrap'>".$p1."</td>".PHP_EOL.
-                  "<td style='width:24%;white-space:nowrap'>".$p2."</td>".PHP_EOL.
-                  "<td style='width:24%;white-space:nowrap'>".$p3."</td>".PHP_EOL.
-                  "<td style='width:24%;white-space:nowrap'>".$p4."</td></tr>".PHP_EOL;
+                  "<td style='font-weight:bold;width:$ColumnWidth;white-space:nowrap'>".$p1."</td>".PHP_EOL.
+                  "<td style='width:$ColumnWidth;white-space:nowrap'>".$p2."</td>".PHP_EOL;
+      if ($GroupSize>2){ $MailTable.="<td style='width:$ColumnWidth;white-space:nowrap'>".$p3."</td>".PHP_EOL;}
+      if ($GroupSize>3){ $MailTable.="<td style='width:$ColumnWidth;white-space:nowrap'>".$p4."</td>";}
+      $MailTable.="</tr>".PHP_EOL;
  
     }
     if ($grp==0) {
@@ -281,6 +312,7 @@
 <form id=MailForm action="Bookings.php" Method=Post>
 <input type=hidden id=frmGenerate name=Generate value="0">
 <input type=hidden id=frmSendmail name=Sendmail value="1">
+<input type=hidden name=GroupSize value="<?php echo $GroupSize;?>">
 <input type=hidden name=Day value="<?php echo $DayShort;?>">
 <input type=hidden name=Offset value="<?php echo $Offset;?>">
 <div class="card">
@@ -313,6 +345,10 @@ function Mail() {
 </script>
 <?php require "Footer.php";
   if ($Sendmail=="1") {
+    $MailTableHeader="<td style='width:$ColumnWidth;white-space:nowrap'>Booking Player</td>
+                      <td style='width:$ColumnWidth;white-space:nowrap'>Player 2</td>";
+    if ($GroupSize>2) { $MailTableHeader.="<td style='width:$ColumnWidth;white-space:nowrap'>Player 3</td>"; }
+    if ($GroupSize>3) { $MailTableHeader.="<td style='width:$ColumnWidth;white-space:nowrap'>Player 4</td>"; }
     $SendToList=substr($SendToList,0,-2);  
     $from = "HGC Table Tappers <bitnami@hgctt.com>";
     $replyto = "Brian Ackland <brian.ackland@me.com>";
@@ -339,10 +375,7 @@ function Mail() {
     </table>
     <table style='text-align:left;background-color:#fff' border=1 cellpadding=0 cellspacing=1>
     <tr><td>#</td>
-    <td style='width:24%;white-space:nowrap'>Booking Player</td>
-    <td style='width:24%;white-space:nowrap'>Player 2</td>
-    <td style='width:24%;white-space:nowrap'>Player 3</td>
-    <td style='width:24%;white-space:nowrap'>Player 4</td>
+    $MailTableHeader
     </tr>
     $MailTable
     </table>

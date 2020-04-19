@@ -39,53 +39,61 @@ require "Navigation.php"; ?>
         }
         $WeekDay=date("D d M Y",strtotime($TimeAdjust));
         $Week=date("Ymd",strtotime($TimeAdjust));
-        $Click="onclick=\"SetUnavailable(this,'$PlayerId','$Week');\"></i>";
+        $Click="onclick=\"SetUnavailable(this,'$PlayerId','$Week');\">";
         $Locked="";
         $sql="SELECT 'locked' from BookingLock where BookingDate='$Week'";
         if ($f = mysqli_query($link,$sql)) {
           if (mysqli_num_rows($f)>0) {
             $Locked="<i class=\"fal fa-lock text-danger\"></i>";
-            $Click="onclick='alert(\"Booking Sheet Generated and Locked\");'></i>";  /* Locked so No CLick */
+            $Click="onclick='alert(\"Booking Sheet Generated and Locked\");'>";  /* Locked so No CLick */
           } 
         }
         $Checked="";
         $sql="SELECT 'checked' from PlayerNotAvailable where BookingDate='$Week' and PlayerId='$PlayerId'";
-        $Available="";
+	    $ShowColor="background-color:PaleGreen";
         $Available="<i class=\"fal fa-check fa-2x text-success\" ";
+        $Symbol="&#10003;";
         if ($f = mysqli_query($link,$sql)) {
           if (mysqli_num_rows($f)>0) {
+	        $ShowColor="background-color:Silver";
             $Available="<i class=\"fal fa-times fa-2x text-danger\" ";
+            $Symbol="&#10008;";
             $Checked="checked";
           }
-          echo "<tr><td style='width:20%;white-space:nowrap'>$Locked $WeekDay</td>".
-               "<td class='text-center'>$Available$Click</td></tr>";
+          $Symbol="";
+          echo "<tr><td style='width:20%;white-space:nowrap;'>$Locked $WeekDay</td>".
+               "<td class='text-center'>$Available$Click$Symbol</i></td></tr>";
         }
       }
       if ($Sat==1) {
         $TimeAdjust="Saturday $WeekOff weeks";
         $WeekDay=date("D d M Y",strtotime($TimeAdjust));
         $Week=date("Ymd",strtotime($TimeAdjust));
-        $Click="onclick=\"SetUnavailable(this,'$PlayerId','$Week');\"></i>";
+        $Click="onclick=\"SetUnavailable(this,'$PlayerId','$Week');\">";
         $Locked="";
         $sql="SELECT 'locked' from BookingLock where BookingDate='$Week'";
         if ($f = mysqli_query($link,$sql)) {
           if (mysqli_num_rows($f)>0) {
             $Locked="<i class=\"fal fa-lock text-danger\"></i>";
-            $Click=" onclick='alert(\"Booking Sheet Generated and Locked\");'></i>";  /* Locked so No CLick */
+            $Click=" onclick='alert(\"Booking Sheet Generated and Locked\");'>";  /* Locked so No CLick */
           } 
         }
         $Checked="";
         $sql="SELECT 'checked' from PlayerNotAvailable where BookingDate='$Week' and PlayerId='$PlayerId'";
         $Checked="";
-        $Available="";
         $Available="<i class=\"fal fa-check fa-2x text-success\" ";
+        $Symbol="&#10003;";
+	    $ShowColor="background-color:PaleGreen";
         if ($f = mysqli_query($link,$sql)) {
           if (mysqli_num_rows($f)>0) {
+	        $ShowColor="background-color:Silver";
             $Available="<i class=\"fal fa-times fa-2x text-danger\" ";
+            $Symbol="&#10008;";
             $Checked="checked";
           }
-          echo "<tr><td style='width:20%;white-space:nowrap'>$Locked $WeekDay</td>".
-               "<td class='text-center'>$Available$Click</td></tr>";
+          $Symbol="";
+          echo "<tr><td style='width:20%;white-space:nowrap;'>$Locked $WeekDay</td>".
+               "<td class='text-center'>$Available$Click$Symbol</i></td></tr>";
         }
       }
     }
