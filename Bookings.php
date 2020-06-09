@@ -27,6 +27,7 @@ if (mysqli_query($link, $sql)) {
   $showCalculation="";
   $DayShort=$Day;
   if ($Day=="Sat"){ 
+    $BookTime="8PM";
     $BookDay="Friday";
     $BookOffset=$Offset-2;
     $Day="Saturday"; 
@@ -34,6 +35,7 @@ if (mysqli_query($link, $sql)) {
     $BookingFilter="date_format(b.BookingDate,'%a')='Sat'"; 
   }
   if ($Day=="Wed"){ 
+    $BookTime="8PM";
     $BookDay="Tuesday";
     $BookOffset=$Offset-2;
     $Day="Wednesday"; 
@@ -369,7 +371,7 @@ function Mail() {
     ".nl2br($Narrative)."
     </td></tr>
     <tr><td>&nbsp;<br></td></tr>
-    <tr><td>Bookings Open at 2PM on $BookOnDate<br></td></tr>
+    <tr><td>Bookings Open at $BookTime on $BookOnDate<br></td></tr>
     <tr><td>Groups for $NiceBookingDate </td></tr>
     <tr><td>&nbsp;<br></td></tr>
     </table>
