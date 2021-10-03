@@ -2,12 +2,12 @@
 //  error_reporting(0);
   require "Database.php";
   $LoadError="";
-  $BookOffset=(isset($_REQUEST["BookOffset"])) ? $_REQUEST["BookOffset"] : "Sat 1";
+  $BookOffset=(isset($_REQUEST["BookOffset"])) ? $_REQUEST["BookOffset"] : "Sat 0";
   $Day=substr($BookOffset,0,3);
   $Offset=substr($BookOffset,4,2);
   $DayShort=$Day;
   if ($Day=="Sat"){ 
-    $BookDay="Friday";
+    $BookDay="Tuesday";
     $BookOffset=$Offset-2;
     $Day="Saturday"; 
     $DayFilter = "p.Saturday=1"; 
@@ -18,7 +18,7 @@
     $BookingFilter4="date_format(b4.BookingDate,'%a')='Sat'"; 
   }
   if ($Day=="Wed"){ 
-    $BookDay="Tuesday";
+    $BookDay="Saturday";
     $BookOffset=$Offset-2;
     $Day="Wednesday"; 
     $DayFilter = "p.Wednesday=1"; 
@@ -33,7 +33,7 @@
   $TimeAdjust="$Day +$Offset weeks";
   $BookingDate=date("Y-m-d",strtotime($TimeAdjust));
   $NiceBookingDate=date("D d M Y",strtotime($TimeAdjust));
-  $TimeAdjust="$BookingDate $BookDay -2 weeks";
+  $TimeAdjust="$BookingDate $BookDay -1 weeks";
   $BookOnDate=date("D d M Y",strtotime($TimeAdjust));
   $LastOffset=$Offset-1;
   $TimeAdjust="$Day +$LastOffset weeks";
@@ -48,7 +48,7 @@
   echo "<input type=hidden name=Day value='$DayShort'>";
   echo "<div class=\"alert alert-success\" role=\"alert\">";
   echo "<h3>$Day Booking Sheet </h3>";
-  echo "Book On : ".$BookOnDate."<br>";
+  echo "Book On : ".$BookOnDate." at 2PM<br>";
   echo "Booking Date :  ";
   echo "<select name=BookOffset onchange='this.form.submit();'>";
   for ($i=-5;$i<2;$i++) {

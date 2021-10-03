@@ -19,7 +19,7 @@ if (mysqli_query($link, $sql)) {
     $SQLError= $sql."<br>Error updating record: " . mysqli_error($link)."<br>";
 }
 
-  $Offset=(isset($_REQUEST["Offset"])) ? $_REQUEST["Offset"] : "1";
+  $Offset=(isset($_REQUEST["Offset"])) ? $_REQUEST["Offset"] : "0";
   $ColumnWidth="48%";
   if ($GroupSize>2) $ColumnWidth="32%";
   if ($GroupSize>3) $ColumnWidth="24%";
