@@ -51,22 +51,29 @@
   echo "Book On : ".$BookOnDate." at 2PM<br>";
   echo "Booking Date :  ";
   echo "<select name=BookOffset onchange='this.form.submit();'>";
-  for ($i=-5;$i<2;$i++) {
-    $TimeAdjust="Wed +$i weeks";
-    $iDate=date("D d M Y",strtotime($TimeAdjust));
-    $of="Wed $i";
-    if ($iDate==$NiceBookingDate) {
-      echo "<option selected value='$of'>$iDate</option>";
+  for ($i=-5;$i<1;$i++) {
+    if(date('D') == 'Thu'|| date('D') == 'Fri'|| date('D') == 'Sat') { 
+      $TimeAdjustA="Sat +$i weeks";
+      $TimeAdjustB="Wed +$i weeks";
+      $ofA="Sat`$i";
+      $ofB="Wed $i";
     } else {
-      echo "<option value='$of'>$iDate</option>";
+      $TimeAdjustA="Wed +$i weeks";
+      $TimeAdjustB="Sat +$i weeks";
+      $ofA="Wed`$i";
+      $ofB="Sat $i";
     }
-    $TimeAdjust="Sat +$i weeks";
-    $iDate=date("D d M Y",strtotime($TimeAdjust));
-    $of="Sat $i";
+    $iDate=date("D d M Y",strtotime($TimeAdjustA));
     if ($iDate==$NiceBookingDate) {
-      echo "<option selected value='$of'>$iDate</option>";
+      echo "<option selected value='$ofA'>$iDate</option>";
     } else {
-      echo "<option value='$of'>$iDate</option>";
+      echo "<option value='$ofA'>$iDate</option>";
+    }
+    $iDate=date("D d M Y",strtotime($TimeAdjustB));
+    if ($iDate==$NiceBookingDate) {
+      echo "<option selected value='$ofB'>$iDate</option>";
+    } else {
+      echo "<option value='$ofB'>$iDate</option>";
     }
   }
   echo "</select>";
