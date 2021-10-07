@@ -1,3 +1,3 @@
 <?php
-  header('Location: ViewBookings.php?BookOffset=Sat%201');
+  header('Location: ViewBookings.php?BookOffset=Sat%200');
 ?>

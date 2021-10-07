@@ -8,7 +8,7 @@
   $DayShort=$Day;
   if ($Day=="Sat"){ 
     $BookDay="Tuesday";
-    $BookOffset=$Offset-2;
+    $BookOffset=$Offset-1;
     $Day="Saturday"; 
     $DayFilter = "p.Saturday=1"; 
     $BookingFilter="date_format(b.BookingDate,'%a')='Sat'"; 
@@ -19,7 +19,7 @@
   }
   if ($Day=="Wed"){ 
     $BookDay="Saturday";
-    $BookOffset=$Offset-2;
+    $BookOffset=$Offset-1;
     $Day="Wednesday"; 
     $DayFilter = "p.Wednesday=1"; 
     $BookingFilter="date_format(b.BookingDate,'%a')='Wed'"; 
