@@ -2,7 +2,7 @@
 //  error_reporting(0);
   require "Database.php";
   $LoadError="";
-  $BookOffset=(isset($_REQUEST["BookOffset"])) ? $_REQUEST["BookOffset"] : "Sat 0";
+  $BookOffset=(isset($_REQUEST["BookOffset"])) ? $_REQUEST["BookOffset"] : "Sat 1";
   $Day=substr($BookOffset,0,3);
   $Offset=substr($BookOffset,4,2);
   $DayShort=$Day;
@@ -51,7 +51,7 @@
   echo "Book On : ".$BookOnDate." at 2PM<br>";
   echo "Booking Date :  ";
   echo "<select name=BookOffset onchange='this.form.submit();'>";
-  for ($i=-5;$i<1;$i++) {
+  for ($i=-5;$i<2;$i++) {
     if(date('D') == 'Thu'|| date('D') == 'Fri'|| date('D') == 'Sat') { 
       $TimeAdjustA="Sat +$i weeks";
       $TimeAdjustB="Wed +$i weeks";
