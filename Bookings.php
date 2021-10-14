@@ -27,16 +27,16 @@ if (mysqli_query($link, $sql)) {
   $showCalculation="";
   $DayShort=$Day;
   if ($Day=="Sat"){ 
-    $BookTime="2PM";
-    $BookDay="Tuesday";
+    $BookTime="4:30PM";
+    $BookDay="Friday";
     $BookOffset=$Offset-2;
     $Day="Saturday"; 
     $DayFilter = "p.Saturday=1"; 
     $BookingFilter="date_format(b.BookingDate,'%a')='Sat'"; 
   }
   if ($Day=="Wed"){ 
-    $BookTime="2PM";
-    $BookDay="Saturday";
+    $BookTime="14:10PM";
+    $BookDay="Friday";
     $BookOffset=$Offset-2;
     $Day="Wednesday"; 
     $DayFilter = "p.Wednesday=1"; 
