@@ -6,7 +6,6 @@ $date = new DateTime();
 $date = $date->format("y:m:d h:i:s");
 $Today=date("D d M Y");
 $TimeAdjust="Saturday +1 weeks";
-#$TimeAdjust="next Saturday";
 $BookingDate=date("Y-m-d",strtotime($TimeAdjust));
 $sql="select a.GroupNo, concat(p.given,' ',p.surname) Player, p.Mobile 
       from Bookings a join Players p on p.id=a.PlayerID1

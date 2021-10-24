@@ -7,7 +7,7 @@
   $Offset=substr($BookOffset,4,2);
   $DayShort=$Day;
   if ($Day=="Sat"){ 
-    $BookDay="Tuesday";
+    $BookDay="Friday";
     $BookOffset=$Offset-1;
     $Day="Saturday"; 
     $DayFilter = "p.Saturday=1"; 
@@ -18,7 +18,7 @@
     $BookingFilter4="date_format(b4.BookingDate,'%a')='Sat'"; 
   }
   if ($Day=="Wed"){ 
-    $BookDay="Saturday";
+    $BookDay="Tuesday";
     $BookOffset=$Offset-1;
     $Day="Wednesday"; 
     $DayFilter = "p.Wednesday=1"; 
@@ -33,7 +33,7 @@
   $TimeAdjust="$Day +$Offset weeks";
   $BookingDate=date("Y-m-d",strtotime($TimeAdjust));
   $NiceBookingDate=date("D d M Y",strtotime($TimeAdjust));
-  $TimeAdjust="$BookingDate $BookDay -1 weeks";
+  $TimeAdjust="$BookingDate $BookDay -2 weeks";
   $BookOnDate=date("D d M Y",strtotime($TimeAdjust));
   $LastOffset=$Offset-1;
   $TimeAdjust="$Day +$LastOffset weeks";
