@@ -15,7 +15,6 @@
  <li>Third Place is $5 (Only paid if the pot is more than $50.)</li>
  <li>Second Place is $10.</li>
  <li>First Place is the rest of the pot.</li>
- <li>First Place buys hot chips for the table (3 bowls. 2 bowls if 10 or less player)</li>
 </ol>
 </li>
 <li>Table Tapping
