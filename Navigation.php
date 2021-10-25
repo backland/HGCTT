@@ -10,6 +10,9 @@
       <div class="navbar-collapse collapse" id="navbarsExample01" style="">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
+            <a class="nav-link" href="Rules.php">Rules</span></a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="ViewBookings.php?Day=Sat">Current Booking Sheets</span></a>
           </li>
           <li class="nav-item">
