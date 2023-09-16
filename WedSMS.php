@@ -7,8 +7,13 @@ $date = $date->format("y:m:d h:i:s");
 $Today=date("D d M Y");
 $TimeAdjust="Wednesday +1 weeks";
 $BookingDate=date("Y-m-d",strtotime($TimeAdjust));
-$sql="select a.GroupNo, concat(p.given,' ',p.surname) Player, p.Mobile 
-      from Bookings a join Players p on p.id=a.PlayerID1
+$sql="select a.GroupNo,
+      (select concat(given,' ',surname) from Players where id=PlayerID1) Player1,
+      (select Mobile from Players where id=PlayerID1) Mobile,
+      (select concat(given,' ',surname) from Players where id=PlayerID2) Player2,
+      (select concat(given,' ',surname) from Players where id=PlayerID3) Player3,
+      (select concat(given,' ',surname) from Players where id=PlayerID4) Player4
+      from Bookings a
       where a.BookingDate = '$BookingDate'";
 $result = mysqli_query($link,$sql);
 if ($result) {
@@ -22,7 +27,13 @@ if ($result) {
         "Accept: application/json",
       );
       $bodyValue = '{ "messages":[ {
-                      "content":"HGC Golf Bookings in 15 Minutes Check Your Group at \n\n https://hgctt.com/wed.php \n\n(DO NOT REPLY)",
+                      "content":"HGC Golf Bookings Open in 10 Minutes.\n\nYour Group: \n'.
+                      $row[1].'\n'.
+                      $row[3].'\n'.
+                      $row[4].'\n'.
+                      $row[5].'\n\n'.
+                      '(DO NOT REPLY)'.
+                      '\n\nhttps://hgctt.com/wed.php",
                       "destination_number":"'.$mobileNo.'"
                     } ] }';
       $ch = curl_init();
@@ -39,6 +50,3 @@ if ($result) {
   }
 }
 ?>
-
-
-
