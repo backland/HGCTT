@@ -5,7 +5,8 @@ require "Database.php";
 $date = new DateTime();
 $date = $date->format("y:m:d h:i:s");
 $Today=date("D d M Y");
-$TimeAdjust="Wednesday +1 weeks";
+/* $TimeAdjust="Wednesday +1 weeks"; */
+$TimeAdjust="next Wednesday";
 $BookingDate=date("Y-m-d",strtotime($TimeAdjust));
 $sql="select a.GroupNo,
       (select concat(given,' ',surname) from Players where id=PlayerID1) Player1,
