@@ -28,8 +28,8 @@ if (mysqli_query($link, $sql)) {
   $DayShort=$Day;
   if ($Day=="Sat"){ 
     $BookTime="2:00pm";
-    $BookOnAdjust="-2 weeks";
-    $BookDay="Friday";
+    $BookOnAdjust="-1 weeks";
+    $BookDay="Monday";
     $BookOffset=$Offset-2;
     $Day="Saturday"; 
     $DayFilter = "p.Saturday=1"; 
@@ -37,9 +37,9 @@ if (mysqli_query($link, $sql)) {
   }
   if ($Day=="Wed"){ 
     $BookTime="02:00pm";
-    $BookOnAdjust="-2 weeks";
-    $BookDay="Tuesday";
-    $BookOffset=$Offset-2;
+    $BookOnAdjust="-1 weeks";
+    $BookDay="Friday";
+    $BookOffset=$Offset-1;
     $Day="Wednesday"; 
     $DayFilter = "p.Wednesday=1"; 
     $BookingFilter="date_format(b.BookingDate,'%a')='Wed'"; 
@@ -91,7 +91,7 @@ if (mysqli_query($link, $sql)) {
   echo "<input type=hidden name=Day value='$DayShort'>";
   echo "<div class=\"alert alert-success\" role=\"alert\">";
   echo "<h3>Generate $Day Groups</h3>";
-  echo "Book On : ".$BookOnDate."<br>";
+  echo "Book On : ".$BookOnDate." at ".$BookTime,"<br>";
   echo "Group Size :  ";
   echo "<select name=GroupSize onchange='this.form.submit();'>";
   if ($GroupSize==2) { echo "<option selected value=2>2</option>";
