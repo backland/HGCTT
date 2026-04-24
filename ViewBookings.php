@@ -7,8 +7,8 @@
   $Offset=substr($BookOffset,4,2);
   $DayShort=$Day;
   if ($Day=="Sat"){ 
-    $BookDay="Friday";
-    $BookWeekOffset="-2 weeks";
+    $BookDay="Monday";
+    $BookWeekOffset="-1 weeks";
     $BookTime="2PM";
     $BookOffset=$Offset-1;
     $Day="Saturday"; 
@@ -21,8 +21,8 @@
   }
   if ($Day=="Wed"){ 
     $BookWeekOffset="-1 week";
-    $BookDay="Thursday";
-    $BookTime="1PM";
+    $BookDay="Friday";
+    $BookTime="2PM";
     $BookOffset=$Offset-1;
     $Day="Wednesday"; 
     $DayFilter = "p.Wednesday=1"; 

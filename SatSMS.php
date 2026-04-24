@@ -28,7 +28,7 @@ if ($result) {
         "Accept: application/json",
       );
       $bodyValue = '{ "messages":[ {
-                      "content":"HGC Golf Bookings Open in 10 Minutes.\n\nYour Group: \n'.
+                      "content":"HGC Golf Bookings Open at 2pm.\n\nYour Group: \n'.
                       $row[1].'\n'.
                       $row[3].'\n'.
                       $row[4].'\n'.
