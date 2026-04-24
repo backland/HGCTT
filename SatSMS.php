@@ -2,6 +2,10 @@
 <?php
 require "SMSConfig.php";
 require "Database.php";
+$now = new DateTime();
+$target = new DateTime('14:00');
+$interval = $now->diff($target);
+$minutesTo2pm = ($interval->days * 1440) + ($interval->h * 60) + $interval->i;
 $date = new DateTime();
 $date = $date->format("y:m:d h:i:s");
 $Today=date("D d M Y");
@@ -28,7 +32,7 @@ if ($result) {
         "Accept: application/json",
       );
       $bodyValue = '{ "messages":[ {
-                      "content":"HGC Golf Bookings Open at 2pm.\n\nYour Group: \n'.
+                      "content":"HGC Golf Bookings Open in '.$minutesTo2pm.' minutes.\n\nYour Group: \n'.
                       $row[1].'\n'.
                       $row[3].'\n'.
                       $row[4].'\n'.
@@ -50,6 +54,4 @@ if ($result) {
   }
 }
 ?>
-
-
 
