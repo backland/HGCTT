@@ -3,7 +3,7 @@
 require "SMSConfig.php";
 require "Database.php";
 $now = new DateTime();
-$target = new DateTime('14:00');
+$target = new DateTime('18:00');
 $interval = $now->diff($target);
 $minutesTo2pm = ($interval->days * 1440) + ($interval->h * 60) + $interval->i;
 $date = new DateTime();

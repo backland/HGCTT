@@ -27,7 +27,7 @@ if (mysqli_query($link, $sql)) {
   $showCalculation="";
   $DayShort=$Day;
   if ($Day=="Sat"){ 
-    $BookTime="2:00pm";
+    $BookTime="6:00pm";
     $BookOnAdjust="-1 weeks";
     $BookDay="Monday";
     $BookOffset=$Offset-2;
@@ -36,7 +36,7 @@ if (mysqli_query($link, $sql)) {
     $BookingFilter="date_format(b.BookingDate,'%a')='Sat'"; 
   }
   if ($Day=="Wed"){ 
-    $BookTime="02:00pm";
+    $BookTime="6:00pm";
     $BookOnAdjust="-1 weeks";
     $BookDay="Friday";
     $BookOffset=$Offset-1;
