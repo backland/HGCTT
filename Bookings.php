@@ -10,6 +10,7 @@
   $Password=(isset($_REQUEST["Password"]))   ? $_REQUEST["Password"] : "";
   $Narrative=(isset($_REQUEST["Narrative"])) ? $_REQUEST["Narrative"] : "";
   $Sendmail=(isset($_REQUEST["Sendmail"]))   ? $_REQUEST["Sendmail"] : "0";
+  $DeleteLock=(isset($_REQUEST["DeleteLock"]))   ? $_REQUEST["DeleteLock"] : "0";
   $Generate=(isset($_REQUEST["Generate"]))   ? $_REQUEST["Generate"] : "0";
   $GroupSize=(isset($_REQUEST["GroupSize"])) ? $_REQUEST["GroupSize"] : $DefaultGroupSize;
   $sql="update config set KeyValue='$GroupSize' where KeyName='GroupSize'";
@@ -27,7 +28,7 @@ if (mysqli_query($link, $sql)) {
   $showCalculation="";
   $DayShort=$Day;
   if ($Day=="Sat"){ 
-    $BookTime="6:00pm";
+    $BookTime="2:00pm";
     $BookOnAdjust="-1 weeks";
     $BookDay="Monday";
     $BookOffset=$Offset-2;
@@ -36,7 +37,7 @@ if (mysqli_query($link, $sql)) {
     $BookingFilter="date_format(b.BookingDate,'%a')='Sat'"; 
   }
   if ($Day=="Wed"){ 
-    $BookTime="6:00pm";
+    $BookTime="2:00pm";
     $BookOnAdjust="-1 weeks";
     $BookDay="Friday";
     $BookOffset=$Offset-1;
@@ -83,11 +84,25 @@ if (mysqli_query($link, $sql)) {
       }
     }
   }
+  if ($DeleteLock==1) {
+    $sql="SELECT BookingDate from BookingLock where BookingDate='$BookingDate'";
+    $result = mysqli_query($link,$sql);    /* Check Booking Record for Week */
+    if ($result) {
+      if(mysqli_num_rows($result) > 0){
+        $sql="DELETE from BookingLock where BookingDate='$BookingDate'";
+        $result = mysqli_query($link,$sql);    /* DELETE Booking Record for Week */
+        $LoadError="alert(\"Booking Date Deleted\");";
+      } else {
+        $LoadError="alert(\"Booking Date not Locked\");";
+      }
+    }
+  }
   require "Header.php";
   require "Navigation.php";
   echo "<form action=Bookings.php method=post>";
   echo "<input type=hidden name=Generate value=0>";
   echo "<input type=hidden name=Sendmail value=0>";
+  echo "<input type=hidden name=DeleteLock value=0>";
   echo "<input type=hidden name=Day value='$DayShort'>";
   echo "<div class=\"alert alert-success\" role=\"alert\">";
   echo "<h3>Generate $Day Groups</h3>";
@@ -316,6 +331,7 @@ if (mysqli_query($link, $sql)) {
 <form id=MailForm action="Bookings.php" Method=Post>
 <input type=hidden id=frmGenerate name=Generate value="0">
 <input type=hidden id=frmSendmail name=Sendmail value="1">
+<input type=hidden id=frmDeleteLock name=DeleteLock value="0">
 <input type=hidden name=GroupSize value="<?php echo $GroupSize;?>">
 <input type=hidden name=Day value="<?php echo $DayShort;?>">
 <input type=hidden name=Offset value="<?php echo $Offset;?>">
@@ -329,6 +345,9 @@ if (mysqli_query($link, $sql)) {
     <?php if ($grp!=0) {
       echo "<button type=button class='btn btn-success' style='width:120px' onclick='Mail();'>Send Email</button>";
     }  ?>
+    <?php if ($grp!=0) {
+      echo "<button type=button class='btn btn-success' style='width:120px' onclick='DeleteIt();'>Delete Lock</button>";
+    }  ?>
     </div>
   </div>
 </div>
@@ -337,12 +356,20 @@ if (mysqli_query($link, $sql)) {
 <script type-text/javascript>
 function GenerateGroups() {
   document.getElementById("frmSendmail").value="0";
+  document.getElementById("frmDeleteLock").value="0";
   document.getElementById("frmGenerate").value="1";
   el=document.getElementById("MailForm")
   el.submit()
 }
 function Mail() {
   el=document.getElementById("MailForm")
+  el.submit()
+}
+function DeleteIt() {
+  el=document.getElementById("MailForm")
+  document.getElementById("frmSendmail").value="0";
+  document.getElementById("frmGenerate").value="0";
+  document.getElementById("frmDeleteLock").value="1";
   el.submit()
 }
 <?php echo $LoadError;?>
