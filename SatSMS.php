@@ -1,4 +1,4 @@
-#!/opt/bitnami/php/bin/php
+#!/usr/bin/php
 <?php
 require "SMSConfig.php";
 require "Database.php";
@@ -13,12 +13,12 @@ $Today=date("D d M Y");
 $TimeAdjust="next Saturday";
 $BookingDate=date("Y-m-d",strtotime($TimeAdjust));
 $sql="select a.GroupNo,
-      (select concat(given,' ',surname) from Players where id=PlayerID1) Player1,
-      (select Mobile from Players where id=PlayerID1) Mobile,
-      (select concat(given,' ',surname) from Players where id=PlayerID2) Player2,
-      (select concat(given,' ',surname) from Players where id=PlayerID3) Player3,
-      (select concat(given,' ',surname) from Players where id=PlayerID4) Player4
-      from Bookings a
+      (select concat(given,' ',surname) from players where id=PlayerID1) Player1,
+      (select Mobile from players where id=PlayerID1) Mobile,
+      (select concat(given,' ',surname) from players where id=PlayerID2) Player2,
+      (select concat(given,' ',surname) from players where id=PlayerID3) Player3,
+      (select concat(given,' ',surname) from players where id=PlayerID4) Player4
+      from bookings a
       where a.BookingDate = '$BookingDate'";
 $result = mysqli_query($link,$sql);
 if ($result) {

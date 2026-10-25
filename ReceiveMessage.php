@@ -1,4 +1,4 @@
-#!/opt/bitnami/php/bin/php
+#!/usr/bin/php
 <?php
 require "SMSConfig.php";
 $headerValue = array(

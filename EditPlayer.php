@@ -15,7 +15,7 @@ if (isset($_POST["cmdUpdate"])) {
       $Saturday=(isset($_REQUEST["Saturday"])) ? $_REQUEST["Saturday"] : null;
       $Wednesday=(isset($_REQUEST["Wednesday"])) ? $_REQUEST["Wednesday"] : null;
       $Mobile=(isset($_REQUEST["Mobile"])) ? $_REQUEST["Mobile"] : null;
-      $SQL="UPDATE Players SET  
+      $SQL="UPDATE players SET  
                MemberNo= ?,
                Name= ?,
                Given= ?,
@@ -35,7 +35,7 @@ if (isset($_POST["cmdUpdate"])) {
    }
 }
 
-$sql="SELECT * FROM Players where Id=$ID";
+$sql="SELECT * FROM players where Id=$ID";
 $results = mysqli_query($link,$sql);
 $player = mysqli_fetch_array($results);
 $Sat=($player[6]=='1')? "checked":"";

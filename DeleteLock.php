@@ -55,11 +55,11 @@
     $DeleteLock=0;
   }
   if ($DeleteLock==1) {
-    $sql="SELECT BookingDate from BookingLock where BookingDate='$BookingDate'";
+    $sql="SELECT BookingDate from bookinglock where BookingDate='$BookingDate'";
     $result = mysqli_query($link,$sql);    /* Check Booking Record for Week */
     if ($result) {
       if(mysqli_num_rows($result) > 0){
-        $sql="DELETE from BookingLock where BookingDate='$BookingDate'";
+        $sql="DELETE from bookinglock where BookingDate='$BookingDate'";
         $result = mysqli_query($link,$sql);    /* DELETE Booking Record for Week */
         $LoadError="alert(\"Booking Date Deleted\");";
       } else {
@@ -105,19 +105,19 @@
   echo "<th scope=col>3</td>";
   echo "<th scope=col>4</td></tr>";
   $sql="select a.GroupNo,
-        (select name from Players where id=PlayerID1) Player1,
-        (select count(*) from Bookings b1
+        (select name from players where id=PlayerID1) Player1,
+        (select count(*) from bookings b1
          where $BookingFilter1 and b1.PlayerID1=a.PlayerID1 and b1.BookingDate<'$BookingDate') BookCount1,
-        (select name from Players where id=PlayerID2) Player2,
-        (select count(*) from Bookings b2
+        (select name from players where id=PlayerID2) Player2,
+        (select count(*) from bookings b2
          where $BookingFilter2 and b2.PlayerID1=a.PlayerID2 and b2.BookingDate<'$BookingDate') BookCount2,
-        (select name from Players where id=PlayerID3) Player3,
-        (select count(*) from Bookings b3
+        (select name from players where id=PlayerID3) Player3,
+        (select count(*) from bookings b3
          where $BookingFilter3 and b3.PlayerID1=a.PlayerID3 and b3.BookingDate<'$BookingDate') BookCount3,
-        (select name from Players where id=PlayerID4) Player4,
-        (select count(*) from Bookings b4
+        (select name from players where id=PlayerID4) Player4,
+        (select count(*) from bookings b4
          where $BookingFilter4 and b4.PlayerID1=a.PlayerID4 and b4.BookingDate<'$BookingDate') BookCount4
-        from Bookings a
+        from bookings a
         where a.BookingDate = '$BookingDate'
         ORDER BY a.GroupNo";
   $result = mysqli_query($link,$sql);

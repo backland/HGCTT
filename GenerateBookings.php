@@ -27,18 +27,18 @@ require "Navigation.php";
 echo '<div class="alert alert-success" role="alert">';
 echo "Booking Date : $Day $NiceBookingDate </div>";
 $groupsize=4;
-$sql="DELETE FROM Bookings Where BookingDate='$BookingDate';";
+$sql="DELETE FROM bookings Where BookingDate='$BookingDate';";
 $result = mysqli_query($link,$sql);
 
 
-$sql="SELECT p.id id, (select count(*) from Bookings b where $BookingFilter and b.PlayerID1=p.id) Total,
-                      (select count(*) from Bookings b 
+$sql="SELECT p.id id, (select count(*) from bookings b where $BookingFilter and b.PlayerID1=p.id) Total,
+                      (select count(*) from bookings b 
                                        where $BookingFilter 
                                        and BookingDate>$RecentBookingLimit
                                        and b.PlayerID1=p.id) LastWeeks
-      FROM Players p
+      FROM players p
       where $DayFilter
-      and  p.id not in (SELECT PlayerID from PlayerNotAvailable where BookingDate='$BookingDate')
+      and  p.id not in (SELECT PlayerID from playernotavailable where BookingDate='$BookingDate')
       Order By LastWeeks, Total";
 $results = mysqli_query($link,$sql);
 if ($results) {
@@ -52,9 +52,9 @@ for ($g=0; $g<$groups; $g++) {
   $bookingId[]=$players[$g];
 }
 $sql="SELECT p.id id,p.name name
-      FROM Players p
+      FROM players p
       where $DayFilter
-      and p.id not in (SELECT PlayerID from PlayerNotAvailable where BookingDate='$BookingDate')
+      and p.id not in (SELECT PlayerID from playernotavailable where BookingDate='$BookingDate')
       and p.id not in (".implode(',',$bookingId).") 
       Order By rand()";
 $result = mysqli_query($link,$sql);
@@ -89,7 +89,7 @@ for ($g=0; $g<$groups; $g++) {
   }
   unset($groupId);
   $groupId=array();
-  $insert="INSERT INTO Bookings (BookingDate,GroupNo,PlayerID1,PlayerID2,PlayerID3,PlayerID4)
+  $insert="INSERT INTO bookings (BookingDate,GroupNo,PlayerID1,PlayerID2,PlayerID3,PlayerID4)
            VALUES ('$BookingDate','$GroupNumber'";
   $groupId[]=$bookingId[$g];
   $insert.=",'".$bookingId[$g]."'";
@@ -104,10 +104,10 @@ for ($g=0; $g<$groups; $g++) {
   }
   $insert.=");";
   $result = mysqli_query($link,$insert);    /* Create Booking Record for Week */
-  $sql="select p.id, p.name, (select count(*) from Bookings b 
+  $sql="select p.id, p.name, (select count(*) from bookings b 
                               where $BookingFilter and b.PlayerID1=p.id 
                               and b.BookingDate<>'$BookingDate') BookCount
-        from Players p where id in (".implode(',',$groupId).") 
+        from players p where id in (".implode(',',$groupId).") 
         ORDER BY FIELD(p.id,".implode(',',$groupId).")";
   $result = mysqli_query($link,$sql);
   if ($result) {

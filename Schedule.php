@@ -16,7 +16,7 @@ if ($Day=="Wed"){
 $TimeAdjust="$Day $Offset weeks";
 $BookingDate=date("Y-m-d",strtotime($TimeAdjust));
 $sql="SELECT p.ID, p.Name, p.Surname, p.Given 
-      FROM Players p WHERE $DayFilter
+      FROM players p WHERE $DayFilter
       Order By p.Surname, p.Given";
 $results = mysqli_query($link,$sql);
 echo mysqli_error($link);
@@ -55,7 +55,7 @@ if ($results) {
       $WeekOff=$i-$Offset;
       $TimeAdjust="$Day $WeekOff weeks";
       $Week=date("Ymd",strtotime($TimeAdjust));
-      $sql="SELECT 'checked' from PlayerNotAvailable where BookingDate='$Week' and PlayerId='$PlayerId'";
+      $sql="SELECT 'checked' from playernotavailable where BookingDate='$Week' and PlayerId='$PlayerId'";
       $Checked="";
 //      $Available="<i class=\"fal fa-check-square text-success\"></i>";
       $Available="";

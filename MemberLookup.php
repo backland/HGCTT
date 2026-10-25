@@ -2,7 +2,7 @@
 error_reporting(0);
 $MemberNo=(isset($_REQUEST["MemberNo"])) ? $_REQUEST["MemberNo"] : "";
 require "Database.php";
-$sql="SELECT ID, MemberNo FROM Players WHERE MemberNo=?";
+$sql="SELECT ID, MemberNo FROM players WHERE MemberNo=?";
 $stmt = mysqli_prepare($link, $sql);
 mysqli_stmt_bind_param($stmt,"i", $MemberNo);
 mysqli_stmt_execute($stmt);

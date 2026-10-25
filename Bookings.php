@@ -74,7 +74,7 @@ if (mysqli_query($link, $sql)) {
       $LoadError="alert(\"Booking Date in Past Generation Not Allowed\");";
       $Generate=0;
     } else {
-      $sql="SELECT BookingDate from BookingLock where BookingDate='$BookingDate'";
+      $sql="SELECT BookingDate from bookinglock where BookingDate='$BookingDate'";
       $result = mysqli_query($link,$sql);    /* Create Booking Record for Week */
       if ($result) {
         if(mysqli_num_rows($result) > 0){
@@ -85,11 +85,11 @@ if (mysqli_query($link, $sql)) {
     }
   }
   if ($DeleteLock==1) {
-    $sql="SELECT BookingDate from BookingLock where BookingDate='$BookingDate'";
+    $sql="SELECT BookingDate from bookinglock where BookingDate='$BookingDate'";
     $result = mysqli_query($link,$sql);    /* Check Booking Record for Week */
     if ($result) {
       if(mysqli_num_rows($result) > 0){
-        $sql="DELETE from BookingLock where BookingDate='$BookingDate'";
+        $sql="DELETE from bookinglock where BookingDate='$BookingDate'";
         $result = mysqli_query($link,$sql);    /* DELETE Booking Record for Week */
         $LoadError="alert(\"Booking Date Deleted\");";
       } else {
@@ -131,7 +131,7 @@ if (mysqli_query($link, $sql)) {
   echo "</select>";
   echo "</div>";
   echo "</form>";
-  $sql="SELECT p.Email Email ,concat(p.surname,' ',p.given) name, p.id FROM Players p
+  $sql="SELECT p.Email Email ,concat(p.surname,' ',p.given) name, p.id FROM players p
         where $DayFilter order by p.surname";
   $result = mysqli_query($link,$sql);
   $CopyTo = "";
@@ -154,38 +154,41 @@ if (mysqli_query($link, $sql)) {
   }
   $CopyTo=rtrim($CopyTo,",");
   if ($Generate==1) {
-    $sql="DELETE FROM Bookings Where BookingDate='$BookingDate';";
+    $sql="DELETE FROM bookings Where BookingDate='$BookingDate';";
     $result = mysqli_query($link,$sql);
     $sql="SELECT count(*)
-          FROM Players p where $DayFilter
-          and  p.id not in (SELECT PlayerID from PlayerNotAvailable where BookingDate='$BookingDate')";
+          FROM players p where $DayFilter
+          and  p.id not in (SELECT PlayerID from playernotavailable where BookingDate='$BookingDate')";
     $results = mysqli_query($link,$sql);
     if ($results) {
       $row = mysqli_fetch_array($results);
       $groups=ceil($row[0]/$GroupSize);
       $extras=$row[0]%$GroupSize;
     }
-    $sql="select ID, PlayerName, TotalBooked, TotalPlayed, NotPlayingThisWeek,BookedLastWeek, TotalBooked/TotalPlayed + NotPlayingThisWeek + BookedLastWeek  ratio from 
+    $sql="select ID, PlayerName, PlayerExcluded, TotalBooked, TotalPlayed, NotPlayingThisWeek,BookedLastWeek, TotalBooked/TotalPlayed + NotPlayingThisWeek + BookedLastWeek + PlayerExcluded ratio from 
           (select p.id ID, p.name PlayerName,
-             (select count(*) from Bookings b 
+             (select count(*) from players ex
+	      where ex.id=p.id and ex.MemberNo in ('161') ) PlayerExcluded,
+             (select count(*) from bookings b 
               where b.PlayerID1=p.id and $BookingFilter 
               and   b.BookingDate<'$BookingDate') TotalBooked,
-             (select count(*) from Bookings b 
+             (select count(*) from bookings b 
               where $BookingFilter and b.BookingDate<'$BookingDate' 
               and (b.PlayerID1=p.id or b.PlayerID2=p.id or b.PlayerID3=p.id or b.PlayerID4=p.id)) TotalPlayed,
-             (SELECT 0 from Bookings b 
+             (SELECT 0 from bookings b 
               where b.BookingDate='$LastBookingDate' 
               and (b.PlayerID1=p.id or b.PlayerID2=p.id or b.PlayerID3=p.id or b.PlayerID4=p.id)) is null NotPlayingThisWeek,
-             (SELECT 1 from Bookings 
+             (SELECT 1 from bookings 
               where BookingDate='$LastBookingDate' and PlayerID1=p.id) is not null BookedLastWeek
-           from Players p 
+           from players p 
            where $DayFilter
-           and p.id not in (Select PlayerID from PlayerNotAvailable where BookingDate='$BookingDate')) as Playing order by ratio, rand()";
+           and p.id not in (Select PlayerID from playernotavailable where BookingDate='$BookingDate')) as Playing order by ratio, rand()";
     $showCalculation="<div class='card'>
                        <div class='card-body'>
                        <h5 class='card-title'>Booking Calculation</h5>
                       <table class='table-striped table table-sm' style='font-size:10px'>
                       <tr><th>Name</td>
+                          <th scope=col class='text-center'>Excluded</th>
                           <th scope=col class='text-center'>Booked</th>
                           <th scope=col class='text-center'>Played</th>
                           <th scope=col class='text-center'>Out <br>$LastBookingDate</th>
@@ -196,11 +199,12 @@ if (mysqli_query($link, $sql)) {
       while ($row = mysqli_fetch_array($results)) {
         $players[] = $row[0];
         $showCalculation.="<tr><td class='text-nowrap'>".$row[1]."</td>".
-                          "    <td class='text-center'>".$row[2]."</td>".
+                          "    <td class='text-center'>".yesNo($row[2])."</td>".
                           "    <td class='text-center'>".$row[3]."</td>".
-                          "    <td class='text-center'>".yesNo($row[4])."</td>".
+                          "    <td class='text-center'>".$row[4]."</td>".
                           "    <td class='text-center'>".yesNo($row[5])."</td>".
-                          "    <td class='text-center'>".sprintf('%0.2f',$row[6])."</td></tr>";
+                          "    <td class='text-center'>".yesNo($row[6])."</td>".
+                          "    <td class='text-center'>".sprintf('%0.2f',$row[7])."</td></tr>";
       }
     }
     $showCalculation.="</table>";
@@ -214,9 +218,9 @@ if (mysqli_query($link, $sql)) {
     for ($g=0; $g<$groups; $g++) {
       $bookingId[]=$players[$g];
     }
-    $sql="SELECT p.id id,p.name name FROM Players p
+    $sql="SELECT p.id id,p.name name FROM players p
           where $DayFilter
-          and p.id not in (SELECT PlayerID from PlayerNotAvailable where BookingDate='$BookingDate')
+          and p.id not in (SELECT PlayerID from playernotavailable where BookingDate='$BookingDate')
           and p.id not in (".implode(',',$bookingId).") 
           Order By rand()";
     $result = mysqli_query($link,$sql);
@@ -239,7 +243,7 @@ if (mysqli_query($link, $sql)) {
       }
       unset($groupId);
       $groupId=array();
-      $insert="INSERT INTO Bookings (BookingDate,GroupNo,PlayerID1,PlayerID2,PlayerID3,PlayerID4)
+      $insert="INSERT INTO bookings (BookingDate,GroupNo,PlayerID1,PlayerID2,PlayerID3,PlayerID4,Spare)
                VALUES ('$BookingDate','$GroupNumber'";
       $groupId[]=$bookingId[$g];
       $insert.=",'".$bookingId[$g]."'";
@@ -254,7 +258,7 @@ if (mysqli_query($link, $sql)) {
       for ($i=$cols;$i<4;$i++) {
         $insert.=",'0'";
       }
-      $insert.=");";
+      $insert.=",'');";
       $result = mysqli_query($link,$insert);    /* Create Booking Record for Week */
     }
   }
@@ -274,11 +278,11 @@ if (mysqli_query($link, $sql)) {
         <tr><th scope=col>#</th>
             <th scope=col>Group</td></tr>";
   $sql="select a.GroupNo,
-        (select concat(given,' ',surname) from Players where id=PlayerID1) Player1,
-        (select concat(given,' ',surname) from Players where id=PlayerID2) Player2";
-  if ($GroupSize>2){ $sql.=",(select concat(given,' ',surname) from Players where id=PlayerID3) Player3";}
-  if ($GroupSize>3){ $sql.=",(select concat(given,' ',surname) from Players where id=PlayerID4) Player4";}
-  $sql.=" from Bookings a
+        (select concat(given,' ',surname) from players where id=PlayerID1) Player1,
+        (select concat(given,' ',surname) from players where id=PlayerID2) Player2";
+  if ($GroupSize>2){ $sql.=",(select concat(given,' ',surname) from players where id=PlayerID3) Player3";}
+  if ($GroupSize>3){ $sql.=",(select concat(given,' ',surname) from players where id=PlayerID4) Player4";}
+  $sql.=" from bookings a
         where a.BookingDate = '$BookingDate'
         ORDER BY a.GroupNo";
   $result = mysqli_query($link,$sql);
@@ -381,7 +385,7 @@ function DeleteIt() {
     if ($GroupSize>2) { $MailTableHeader.="<td style='width:$ColumnWidth;white-space:nowrap'>Player 3</td>"; }
     if ($GroupSize>3) { $MailTableHeader.="<td style='width:$ColumnWidth;white-space:nowrap'>Player 4</td>"; }
     $SendToList=substr($SendToList,0,-2);  
-    $from = "HGC Table Tappers <bitnami@hgctt.com>";
+    $from = "HGC Table Tappers <admin@hgctt.com>";
     $replyto = "Brian Ackland <brian.ackland@me.com>";
     $mail_subject="HGC Table Tapper Bookings for $NiceBookingDate";
     $mail_headers =  "MIME-Version: 1.0".PHP_EOL;
@@ -422,7 +426,7 @@ function DeleteIt() {
        $mail_subject,
        $mail_message,
        $mail_headers);
-    $insert="INSERT INTO BookingLock(BookingDate) VALUES ('$BookingDate')";
+    $insert="INSERT INTO bookinglock(BookingDate) VALUES ('$BookingDate')";
     $result = mysqli_query($link,$insert);    /* Create Booking Lock Record for Week */
  
     echo "<script type=text/javascript>alert(\"Mail Sent\");</script>";

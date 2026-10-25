@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 require "Database.php";
-$sql="SELECT * FROM Players
+$sql="SELECT * FROM players
       Order By surname, given";
 $results = mysqli_query($link,$sql);
 require "Header.php"; 

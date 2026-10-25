@@ -99,11 +99,11 @@
             <th scope=col>Group</td></tr>";
 
   $sql="select a.GroupNo,
-        (select concat(given,' ',surname) from Players where id=PlayerID1) Player1,
-        (select concat(given,' ',surname) from Players where id=PlayerID2) Player2,
-        (select concat(given,' ',surname) from Players where id=PlayerID3) Player3,
-        (select concat(given,' ',surname) from Players where id=PlayerID4) Player4
-        from Bookings a
+        (select concat(given,' ',surname) from players where id=PlayerID1) Player1,
+        (select concat(given,' ',surname) from players where id=PlayerID2) Player2,
+        (select concat(given,' ',surname) from players where id=PlayerID3) Player3,
+        (select concat(given,' ',surname) from players where id=PlayerID4) Player4
+        from bookings a
         where a.BookingDate = '$BookingDate'
         ORDER BY a.GroupNo";
   $result = mysqli_query($link,$sql);

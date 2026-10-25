@@ -4,7 +4,7 @@ require "Database.php";
 $PlayerId=(isset($_REQUEST["PlayerId"])) ? $_REQUEST["PlayerId"] : "0";
 $Offset=(isset($_REQUEST["Offset"])) ? $_REQUEST["Offset"] : "0";
   $sql="SELECT p.ID, p.Name, p.Surname, p.Given , p.Wednesday, p.Saturday
-        FROM Players p WHERE ID=$PlayerId";
+        FROM players p WHERE ID=$PlayerId";
   $results = mysqli_query($link,$sql);
   echo mysqli_error($link);
   while ($row = mysqli_fetch_array($results)) {
@@ -41,7 +41,7 @@ require "Navigation.php"; ?>
         $Week=date("Ymd",strtotime($TimeAdjust));
         $Click="onclick=\"SetUnavailable(this,'$PlayerId','$Week');\">";
         $Locked="";
-        $sql="SELECT 'locked' from BookingLock where BookingDate='$Week'";
+        $sql="SELECT 'locked' from bookinglock where BookingDate='$Week'";
         if ($f = mysqli_query($link,$sql)) {
           if (mysqli_num_rows($f)>0) {
             $Locked="<i class=\"fal fa-lock text-danger\"></i>";
@@ -49,7 +49,7 @@ require "Navigation.php"; ?>
           } 
         }
         $Checked="";
-        $sql="SELECT 'checked' from PlayerNotAvailable where BookingDate='$Week' and PlayerId='$PlayerId'";
+        $sql="SELECT 'checked' from playernotavailable where BookingDate='$Week' and PlayerId='$PlayerId'";
 	    $ShowColor="background-color:PaleGreen";
         $Available="<i class=\"fal fa-check fa-2x text-success\" ";
         $Symbol="&#10003;";
@@ -71,7 +71,7 @@ require "Navigation.php"; ?>
         $Week=date("Ymd",strtotime($TimeAdjust));
         $Click="onclick=\"SetUnavailable(this,'$PlayerId','$Week');\">";
         $Locked="";
-        $sql="SELECT 'locked' from BookingLock where BookingDate='$Week'";
+        $sql="SELECT 'locked' from bookinglock where BookingDate='$Week'";
         if ($f = mysqli_query($link,$sql)) {
           if (mysqli_num_rows($f)>0) {
             $Locked="<i class=\"fal fa-lock text-danger\"></i>";
@@ -79,7 +79,7 @@ require "Navigation.php"; ?>
           } 
         }
         $Checked="";
-        $sql="SELECT 'checked' from PlayerNotAvailable where BookingDate='$Week' and PlayerId='$PlayerId'";
+        $sql="SELECT 'checked' from playernotavailable where BookingDate='$Week' and PlayerId='$PlayerId'";
         $Checked="";
         $Available="<i class=\"fal fa-check fa-2x text-success\" ";
         $Symbol="&#10003;";

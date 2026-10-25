@@ -4,14 +4,14 @@ $logdate = (new DateTime())->setTimeZone(new DateTimeZone('Australia/Melbourne')
 $BookingDate=(isset($_REQUEST["BookingDate"])) ? $_REQUEST["BookingDate"] : "";
 $PlayerId=(isset($_REQUEST["PlayerId"])) ? $_REQUEST["PlayerId"] : "";
 require "Database.php";
-$sql="SELECT 1 FROM PlayerNotAvailable WHERE PlayerID= ? and BookingDate =?";
+$sql="SELECT 1 FROM playernotavailable WHERE PlayerID= ? and BookingDate =?";
 $stmt = mysqli_prepare($link, $sql);
 mysqli_stmt_bind_param($stmt, 'is', $PlayerId,$BookingDate);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $record);
 if (mysqli_stmt_fetch($stmt)) { 
   mysqli_stmt_free_result($stmt);
-  $sql="DELETE FROM PlayerNotAvailable WHERE PlayerID= ? and BookingDate =?";
+  $sql="DELETE FROM playernotavailable WHERE PlayerID= ? and BookingDate =?";
   $stmt = mysqli_prepare($link, $sql);
   mysqli_stmt_bind_param($stmt, 'is', $PlayerId,$BookingDate);
   mysqli_stmt_execute($stmt);
@@ -22,7 +22,7 @@ if (mysqli_stmt_fetch($stmt)) {
   $myfile = file_put_contents('PlayerAvailable.log', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
 } else {
   mysqli_stmt_free_result($stmt);
-  $sql="INSERT INTO PlayerNotAvailable (PlayerID, BookingDate) VALUES (?,?)";
+  $sql="INSERT INTO playernotavailable (PlayerID, BookingDate) VALUES (?,?)";
   $stmt = mysqli_prepare($link, $sql);
   mysqli_stmt_bind_param($stmt, 'is', $PlayerId,$BookingDate);
   mysqli_stmt_execute($stmt);
