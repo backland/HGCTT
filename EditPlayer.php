@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+/*error_reporting(0);*/
 require "Database.php";
 $error_msg="";
 $ID=(isset($_REQUEST["ID"])) ? $_REQUEST["ID"] : "";
@@ -15,6 +15,8 @@ if (isset($_POST["cmdUpdate"])) {
       $Saturday=(isset($_REQUEST["Saturday"])) ? $_REQUEST["Saturday"] : null;
       $Wednesday=(isset($_REQUEST["Wednesday"])) ? $_REQUEST["Wednesday"] : null;
       $Mobile=(isset($_REQUEST["Mobile"])) ? $_REQUEST["Mobile"] : null;
+      $Suspend=(isset($_REQUEST["Suspend"])) ? $_REQUEST["Suspend"] : 0;
+      $NoBooking=(isset($_REQUEST["NoBooking"])) ? $_REQUEST["NoBooking"] : 0;
       $SQL="UPDATE players SET  
                MemberNo= ?,
                Name= ?,
@@ -23,10 +25,12 @@ if (isset($_POST["cmdUpdate"])) {
                Email= ?,
                Wednesday= ?,
                Saturday= ?,
-               Mobile= ?
+               Mobile= ?,
+               Suspend= ?,
+               NoBooking= ?
             WHERE ID= ? ";
      $stmt = mysqli_prepare($link, $SQL);
-     mysqli_stmt_bind_param($stmt, 'issssiisi', $MemberNo,$Name,$Given, $Surname, $Email,$Wednesday,$Saturday,$Mobile,$ID);
+     mysqli_stmt_bind_param($stmt, 'issssiisiii', $MemberNo,$Name,$Given, $Surname, $Email,$Wednesday,$Saturday,$Mobile,$Suspend,$NoBooking,$ID);
      mysqli_stmt_execute($stmt);
      header("Location: Players.php");
      exit();
@@ -40,6 +44,8 @@ $results = mysqli_query($link,$sql);
 $player = mysqli_fetch_array($results);
 $Sat=($player[6]=='1')? "checked":"";
 $Wed=($player[8]=='1')? "checked":"";
+$Suspend=($player[10]=='1')? "checked":"";
+$NoBooking=($player[11]=='1')? "checked":"";
 require "Header.php"; 
 require "Navigation.php";
 
@@ -69,6 +75,16 @@ require "Navigation.php";
      <div class="custom-control custom-checkbox custom-control-inline">
        <input type="checkbox" class="custom-control-input" id=Saturday name='Saturday' <?php echo $Sat;?> value=1> 
        <label class="custom-control-label" for="Saturday">Saturday</label>
+     </div>
+  </li>
+  <li class="list-group-item">
+     <div class="custom-control custom-checkbox custom-control-inline">
+       <input type="checkbox" class="custom-control-input" id=Suspend name='Suspend' <?php echo $Suspend;?> value=1> 
+       <label class="custom-control-label" for="Suspend">Suspend</label>
+     </div>
+     <div class="custom-control custom-checkbox custom-control-inline">
+       <input type="checkbox" class="custom-control-input" id=NoBooking name='NoBooking' <?php echo $NoBooking;?> value=1> 
+       <label class="custom-control-label" for="NoBooking">NoBooking</label>
      </div>
         </li>    
   <li class="list-group-item"><label>Password</label>

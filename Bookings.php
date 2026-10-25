@@ -166,9 +166,7 @@ if (mysqli_query($link, $sql)) {
       $extras=$row[0]%$GroupSize;
     }
     $sql="select ID, PlayerName, PlayerExcluded, TotalBooked, TotalPlayed, NotPlayingThisWeek,BookedLastWeek, TotalBooked/TotalPlayed + NotPlayingThisWeek + BookedLastWeek + PlayerExcluded ratio from 
-          (select p.id ID, p.name PlayerName,
-             (select count(*) from players ex
-	      where ex.id=p.id and ex.MemberNo in ('161') ) PlayerExcluded,
+          (select p.id ID, p.name, p.NoBooking PlayerName,
              (select count(*) from bookings b 
               where b.PlayerID1=p.id and $BookingFilter 
               and   b.BookingDate<'$BookingDate') TotalBooked,
@@ -181,7 +179,8 @@ if (mysqli_query($link, $sql)) {
              (SELECT 1 from bookings 
               where BookingDate='$LastBookingDate' and PlayerID1=p.id) is not null BookedLastWeek
            from players p 
-           where $DayFilter
+	   where $DayFilter
+           and p.Suspend=0
            and p.id not in (Select PlayerID from playernotavailable where BookingDate='$BookingDate')) as Playing order by ratio, rand()";
     $showCalculation="<div class='card'>
                        <div class='card-body'>
@@ -345,12 +344,12 @@ if (mysqli_query($link, $sql)) {
     <textarea class="form-control" id="Narrative" placeholder="Enter Email Text"  name="Narrative" rows="5"><?php echo $Narrative;?></textarea>
     <input type=password class="form-control" placeholder="Enter Password" id=frmPassword name=Password value="">
     <div class='card-body text-center'>
-    <button type=button class='btn btn-success' style='width:120px' onclick="GenerateGroups();">Generate</button>
+    <button type=button class='btn btn-success' style='width:100px' onclick="GenerateGroups();">Generate</button>
     <?php if ($grp!=0) {
-      echo "<button type=button class='btn btn-success' style='width:120px' onclick='Mail();'>Send Email</button>";
+      echo "<button type=button class='btn btn-success' style='width:100px' onclick='Mail();'>Email</button>";
     }  ?>
     <?php if ($grp!=0) {
-      echo "<button type=button class='btn btn-success' style='width:120px' onclick='DeleteIt();'>Delete Lock</button>";
+      echo "<button type=button class='btn btn-success' style='width:100px' onclick='DeleteIt();'>UnLock</button>";
     }  ?>
     </div>
   </div>
