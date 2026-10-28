@@ -7,7 +7,7 @@
   $results = mysqli_query($link,$sql);
   $KeyValue = mysqli_fetch_assoc(mysqli_query($link, "select KeyValue from config where KeyName='GroupSize'"));
   $DefaultGroupSize = $KeyValue['KeyValue'];
-  $Password=(isset($_REQUEST["Password"]))   ? $_REQUEST["Password"] : "";
+  /*  $Password=(isset($_REQUEST["Password"]))   ? $_REQUEST["Password"] : ""; */
   $Narrative=(isset($_REQUEST["Narrative"])) ? $_REQUEST["Narrative"] : "";
   $Sendmail=(isset($_REQUEST["Sendmail"]))   ? $_REQUEST["Sendmail"] : "0";
   $DeleteLock=(isset($_REQUEST["DeleteLock"]))   ? $_REQUEST["DeleteLock"] : "0";
@@ -24,6 +24,8 @@ if (mysqli_query($link, $sql)) {
   $ColumnWidth="48%";
   if ($GroupSize>2) $ColumnWidth="32%";
   if ($GroupSize>3) $ColumnWidth="24%";
+  if ($GroupSize>4) $ColumnWidth="18%";
+  if ($GroupSize>5) $ColumnWidth="15%";
   $Day=(isset($_REQUEST["Day"])) ? $_REQUEST["Day"] : "Sat";
   $showCalculation="";
   $DayShort=$Day;
@@ -57,6 +59,7 @@ if (mysqli_query($link, $sql)) {
   $LastBookingDate=date("Y-m-d",strtotime($TimeAdjust));
   $TimeAdjust="$Day -2 weeks";
   $RecentBookingLimit=date("Y-m-d",strtotime($TimeAdjust));
+  /*
   $Taunt[]="Your password is invalid.";
   $Taunt[]="Go and play with you balls. Wrong Password.";
   $Taunt[]="No You Can't. You putt like a girl.";
@@ -69,6 +72,7 @@ if (mysqli_query($link, $sql)) {
     $Generate=0;
     $Sendmail=0;
   }
+  */
   if ($Generate==1) {
     if ($BookingDate<date("Y-m-d")) {
       $LoadError="alert(\"Booking Date in Past Generation Not Allowed\");";
@@ -115,6 +119,8 @@ if (mysqli_query($link, $sql)) {
               } else { echo "<option value=3>3</option>"; }
   if ($GroupSize==4) { echo "<option selected value=4>4</option>";
               } else { echo "<option value=4>4</option>"; }
+  if ($GroupSize==6) { echo "<option selected value=6>6</option>";
+              } else { echo "<option value=6>6</option>"; }
   echo "</select><br>";
   echo $SQLError;
   echo "Booking Date :  ";
@@ -157,25 +163,26 @@ if (mysqli_query($link, $sql)) {
     $sql="DELETE FROM bookings Where BookingDate='$BookingDate';";
     $result = mysqli_query($link,$sql);
     $sql="SELECT count(*)
-          FROM players p where $DayFilter
+          FROM players p where $DayFilter and p.Suspend=0
           and  p.id not in (SELECT PlayerID from playernotavailable where BookingDate='$BookingDate')";
     $results = mysqli_query($link,$sql);
     if ($results) {
       $row = mysqli_fetch_array($results);
       $groups=ceil($row[0]/$GroupSize);
       $extras=$row[0]%$GroupSize;
+      if ($GroupSize==6 && $extras>1) $extras=0;
     }
     $sql="select ID, PlayerName, PlayerExcluded, TotalBooked, TotalPlayed, NotPlayingThisWeek,BookedLastWeek, TotalBooked/TotalPlayed + NotPlayingThisWeek + BookedLastWeek + PlayerExcluded ratio from 
-          (select p.id ID, p.name, p.NoBooking PlayerName,
+          (select p.id ID, p.name PlayerName, p.NoBooking PlayerExcluded,
              (select count(*) from bookings b 
               where b.PlayerID1=p.id and $BookingFilter 
               and   b.BookingDate<'$BookingDate') TotalBooked,
              (select count(*) from bookings b 
               where $BookingFilter and b.BookingDate<'$BookingDate' 
-              and (b.PlayerID1=p.id or b.PlayerID2=p.id or b.PlayerID3=p.id or b.PlayerID4=p.id)) TotalPlayed,
+              and (b.PlayerID1=p.id or b.PlayerID2=p.id or b.PlayerID3=p.id or b.PlayerID4=p.id or b.PlayerID5=p.id or b.PlayerID6=p.id)) TotalPlayed,
              (SELECT 0 from bookings b 
               where b.BookingDate='$LastBookingDate' 
-              and (b.PlayerID1=p.id or b.PlayerID2=p.id or b.PlayerID3=p.id or b.PlayerID4=p.id)) is null NotPlayingThisWeek,
+              and (b.PlayerID1=p.id or b.PlayerID2=p.id or b.PlayerID3=p.id or b.PlayerID4=p.id or b.PlayerID5=p.id or b.PlayerID6=p.id)) is null NotPlayingThisWeek,
              (SELECT 1 from bookings 
               where BookingDate='$LastBookingDate' and PlayerID1=p.id) is not null BookedLastWeek
            from players p 
@@ -218,7 +225,7 @@ if (mysqli_query($link, $sql)) {
       $bookingId[]=$players[$g];
     }
     $sql="SELECT p.id id,p.name name FROM players p
-          where $DayFilter
+          where $DayFilter and p.Suspend=0
           and p.id not in (SELECT PlayerID from playernotavailable where BookingDate='$BookingDate')
           and p.id not in (".implode(',',$bookingId).") 
           Order By rand()";
@@ -242,7 +249,7 @@ if (mysqli_query($link, $sql)) {
       }
       unset($groupId);
       $groupId=array();
-      $insert="INSERT INTO bookings (BookingDate,GroupNo,PlayerID1,PlayerID2,PlayerID3,PlayerID4,Spare)
+      $insert="INSERT INTO bookings (BookingDate,GroupNo,PlayerID1,PlayerID2,PlayerID3,PlayerID4,PlayerID5,PlayerID6,Spare)
                VALUES ('$BookingDate','$GroupNumber'";
       $groupId[]=$bookingId[$g];
       $insert.=",'".$bookingId[$g]."'";
@@ -254,7 +261,7 @@ if (mysqli_query($link, $sql)) {
         $p++;
         $cols=$cols+1;
       }
-      for ($i=$cols;$i<4;$i++) {
+      for ($i=$cols;$i<6;$i++) {
         $insert.=",'0'";
       }
       $insert.=",'');";
@@ -281,6 +288,8 @@ if (mysqli_query($link, $sql)) {
         (select concat(given,' ',surname) from players where id=PlayerID2) Player2";
   if ($GroupSize>2){ $sql.=",(select concat(given,' ',surname) from players where id=PlayerID3) Player3";}
   if ($GroupSize>3){ $sql.=",(select concat(given,' ',surname) from players where id=PlayerID4) Player4";}
+  if ($GroupSize>4){ $sql.=",(select concat(given,' ',surname) from players where id=PlayerID5) Player5";}
+  if ($GroupSize>5){ $sql.=",(select concat(given,' ',surname) from players where id=PlayerID6) Player6";}
   $sql.=" from bookings a
         where a.BookingDate = '$BookingDate'
         ORDER BY a.GroupNo";
@@ -291,31 +300,41 @@ if (mysqli_query($link, $sql)) {
     $MailTable="";
     while ($row = mysqli_fetch_array($result)) {
       $grp++;
-      $p1="&nbsp;"; $p2="&nbsp;"; $p3="&nbsp;"; $p4="&nbsp;";
+      $p1="&nbsp;"; $p2="&nbsp;"; $p3="&nbsp;"; $p4="&nbsp;";$p5="&nbsp;";$p6="&nbsp;";
       if (!empty($row[1])) $p1="<b>".htmlspecialchars($row[1])."</b>";
       if (!empty($row[2])) $p2=htmlspecialchars($row[2]);
       if ($GroupSize>2) {if (!empty($row[3])) $p3=htmlspecialchars($row[3]);}
       if ($GroupSize>3) {if (!empty($row[4])) $p4=htmlspecialchars($row[4]);}
+      if ($GroupSize>4) {if (!empty($row[4])) $p5=htmlspecialchars($row[5]);}
+      if ($GroupSize>5) {if (!empty($row[4])) $p6=htmlspecialchars($row[6]);}
       $tableLarge.="<tr><td>".$row[0]."</td>
                         <td class='text-nowrap'>".$p1."</td>
                         <td class='text-nowrap'>".$p2."</td>";
       if ($GroupSize>2){ $tableLarge.="<td class='text-nowrap'>".$p3."</td>";}
       if ($GroupSize>3){ $tableLarge.="<td class='text-nowrap'>".$p4."</td>";}
+      if ($GroupSize>4){ $tableLarge.="<td class='text-nowrap'>".$p5."</td>";}
+      if ($GroupSize>5){ $tableLarge.="<td class='text-nowrap'>".$p6."</td>";}
       $tableLarge.="<tr>";
       $tableSmall.="<tr><td>".$row[0]."</td>
                         <td>".$p1."<br>".$p2;
       if ($GroupSize>2){ $tableSmall.="<br>".$p3;}
       if ($GroupSize>3){ $tableSmall.="<br>".$p4;}
+      if ($GroupSize>4){ $tableSmall.="<br>".$p5;}
+      if ($GroupSize>5){ $tableSmall.="<br>".$p6;}
       $tableSmall.="</td><tr>";
       if (!empty($row[1])) $p1=htmlspecialchars($row[1]);
       if (!empty($row[2])) $p2=htmlspecialchars($row[2]);
       if ($GroupSize>2){ if (!empty($row[3])) $p3=htmlspecialchars($row[3]);}
       if ($GroupSize>3){ if (!empty($row[4])) $p4=htmlspecialchars($row[4]);}
+      if ($GroupSize>4){ if (!empty($row[5])) $p4=htmlspecialchars($row[5]);}
+      if ($GroupSize>5){ if (!empty($row[6])) $p4=htmlspecialchars($row[6]);}
       $MailTable.="<tr><td>".$row[0]."</td>".PHP_EOL.
                   "<td style='font-weight:bold;width:$ColumnWidth;white-space:nowrap'>".$p1."</td>".PHP_EOL.
                   "<td style='width:$ColumnWidth;white-space:nowrap'>".$p2."</td>".PHP_EOL;
       if ($GroupSize>2){ $MailTable.="<td style='width:$ColumnWidth;white-space:nowrap'>".$p3."</td>".PHP_EOL;}
       if ($GroupSize>3){ $MailTable.="<td style='width:$ColumnWidth;white-space:nowrap'>".$p4."</td>";}
+      if ($GroupSize>4){ $MailTable.="<td style='width:$ColumnWidth;white-space:nowrap'>".$p5."</td>";}
+      if ($GroupSize>5){ $MailTable.="<td style='width:$ColumnWidth;white-space:nowrap'>".$p6."</td>";}
       $MailTable.="</tr>".PHP_EOL;
  
     }
@@ -342,7 +361,7 @@ if (mysqli_query($link, $sql)) {
   <div class="card-body">
     <h5 class="card-title">Message</h5>
     <textarea class="form-control" id="Narrative" placeholder="Enter Email Text"  name="Narrative" rows="5"><?php echo $Narrative;?></textarea>
-    <input type=password class="form-control" placeholder="Enter Password" id=frmPassword name=Password value="">
+<!--    <input type=password class="form-control" placeholder="Enter Password" id=frmPassword name=Password value=""> -->
     <div class='card-body text-center'>
     <button type=button class='btn btn-success' style='width:100px' onclick="GenerateGroups();">Generate</button>
     <?php if ($grp!=0) {
@@ -383,6 +402,8 @@ function DeleteIt() {
                       <td style='width:$ColumnWidth;white-space:nowrap'>Player 2</td>";
     if ($GroupSize>2) { $MailTableHeader.="<td style='width:$ColumnWidth;white-space:nowrap'>Player 3</td>"; }
     if ($GroupSize>3) { $MailTableHeader.="<td style='width:$ColumnWidth;white-space:nowrap'>Player 4</td>"; }
+    if ($GroupSize>4) { $MailTableHeader.="<td style='width:$ColumnWidth;white-space:nowrap'>Player 5</td>"; }
+    if ($GroupSize>5) { $MailTableHeader.="<td style='width:$ColumnWidth;white-space:nowrap'>Player 6</td>"; }
     $SendToList=substr($SendToList,0,-2);  
     $from = "HGC Table Tappers <admin@hgctt.com>";
     $replyto = "Brian Ackland <brian.ackland@me.com>";

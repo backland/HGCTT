@@ -5,8 +5,9 @@ $error_msg="";
 $ID=(isset($_REQUEST["ID"])) ? $_REQUEST["ID"] : "";
 if (!is_numeric($ID)) exit;
 if (isset($_POST["cmdUpdate"])) {
-    $Password=(isset($_REQUEST["Password"])) ? $_REQUEST["Password"] : null;
-    if ($Password=="G0lf@HGCTT") {
+/*    $Password=(isset($_REQUEST["Password"])) ? $_REQUEST["Password"] : null;
+      if ($Password=="G0lf@HGCTT") {
+*/
       $MemberNo=(isset($_REQUEST["MemberNo"])) ? $_REQUEST["MemberNo"] : null;
       $Name=(isset($_REQUEST["Name"])) ? $_REQUEST["Name"] : null;
       $Given=(isset($_REQUEST["Given"])) ? $_REQUEST["Given"] : null;
@@ -34,9 +35,11 @@ if (isset($_POST["cmdUpdate"])) {
      mysqli_stmt_execute($stmt);
      header("Location: Players.php");
      exit();
+/*
    } else {
      $error_msg="<h3 class='text-center'>INVALID PASSWORD</h3>";
    }
+*/
 }
 
 $sql="SELECT * FROM players where Id=$ID";
@@ -87,8 +90,9 @@ require "Navigation.php";
        <label class="custom-control-label" for="NoBooking">NoBooking</label>
      </div>
         </li>    
-  <li class="list-group-item"><label>Password</label>
+<!--  <li class="list-group-item"><label>Password</label>
    <input size=40 class='form-control' id=Password name=Password type=password value=''></li>    
+-->
   </ul>
 <input type=hidden name=ID value="<?php echo $player[0]; ?>">
 <input type=hidden name=cmdUpdate value="<?php echo $player[0]; ?>">

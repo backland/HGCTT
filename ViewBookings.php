@@ -1,5 +1,5 @@
 <?php
-//  error_reporting(0);
+  error_reporting(0);
   require "Database.php";
   $LoadError="";
   $BookOffset=(isset($_REQUEST["BookOffset"])) ? $_REQUEST["BookOffset"] : "Sat 1";
@@ -90,7 +90,9 @@
             <th scope=col>Booking</td>
             <th scope=col>Player 2 </td>
             <th scope=col>Player 3</td>
-            <th scope=col>Player 4</td></tr>";
+            <th scope=col>Player 4</td>
+            <th scope=col>Player 5</td>
+            <th scope=col>Player 6</td></tr>";
 
   $tableSmall="<div class='card d-block d-sm-none'>
         <div class='card-body'>
@@ -102,7 +104,9 @@
         (select concat(given,' ',surname) from players where id=PlayerID1) Player1,
         (select concat(given,' ',surname) from players where id=PlayerID2) Player2,
         (select concat(given,' ',surname) from players where id=PlayerID3) Player3,
-        (select concat(given,' ',surname) from players where id=PlayerID4) Player4
+        (select concat(given,' ',surname) from players where id=PlayerID4) Player4,
+        (select concat(given,' ',surname) from players where id=PlayerID5) Player5,
+        (select concat(given,' ',surname) from players where id=PlayerID6) Player6
         from bookings a
         where a.BookingDate = '$BookingDate'
         ORDER BY a.GroupNo";
@@ -117,13 +121,17 @@
       if (!empty($row[2])) $p2=htmlspecialchars($row[2]);
       if (!empty($row[3])) $p3=htmlspecialchars($row[3]);
       if (!empty($row[4])) $p4=htmlspecialchars($row[4]);
+      if (!empty($row[5])) $p5=htmlspecialchars($row[5]);
+      if (!empty($row[6])) $p4=htmlspecialchars($row[6]);
       $tableLarge.="<tr><td>".$row[0]."</td>
                         <td class='text-nowrap'>".$p1."</td>
                         <td class='text-nowrap'>".$p2."</td>
                         <td class='text-nowrap'>".$p3."</td>
-                        <td class='text-nowrap'>".$p4."</td><tr>";
+                        <td class='text-nowrap'>".$p4."</td>
+                        <td class='text-nowrap'>".$p5."</td>
+                        <td class='text-nowrap'>".$p6."</td><tr>";
       $tableSmall.="<tr><td>".$row[0]."</td>
-                        <td>".$p1."<br>".$p2."<br>".$p3."<br>".$p4."</td></tr>";
+                        <td>".$p1."<br>".$p2."<br>".$p3."<br>".$p4."<br>".$p5."<br>".$p6."</td></tr>";
     }
     if ($grp==0) {
        $tableLarge.= "<tr><td colspan=5 style='text-align:center'><h3>Booking Sheet Not Created</td></tr>";

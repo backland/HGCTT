@@ -17,7 +17,9 @@ $sql="select a.GroupNo,
       (select Mobile from players where id=PlayerID1) Mobile,
       (select concat(given,' ',surname) from players where id=PlayerID2) Player2,
       (select concat(given,' ',surname) from players where id=PlayerID3) Player3,
-      (select concat(given,' ',surname) from players where id=PlayerID4) Player4
+      (select concat(given,' ',surname) from players where id=PlayerID4) Player4,
+      (select concat(given,' ',surname) from players where id=PlayerID5) Player5,
+      (select concat(given,' ',surname) from players where id=PlayerID6) Player6
       from bookings a
       where a.BookingDate = '$BookingDate'";
 $result = mysqli_query($link,$sql);
@@ -36,7 +38,9 @@ if ($result) {
                       $row[1].'\n'.
                       $row[3].'\n'.
                       $row[4].'\n'.
-                      $row[5].'\n\n'.
+                      $row[5].'\n'.
+                      $row[6].'\n'.
+                      $row[7].'\n\n'.
                       '\n\nhttps://hgctt.com/sat.php",
                       "destination_number":"'.$mobileNo.'"
                     } ] }';
